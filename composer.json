@@ -1,0 +1,30 @@
+{
+	"name": "dasher/spider",
+	"description": "spider",
+	"keywords": [
+		"spider",
+		"india"
+	],
+	"authors": [
+		{
+			"name": "dasher",
+			"email": "shaoyejibada@gmail.com",
+			"role": "Developer"
+		}
+	],
+	"license": "MIT",
+	"require": {
+		"php": ">=7.4",
+		"guzzlehttp/guzzle": "^6.5.8 || ^7.4.5",
+		"ext-json": "*",
+		"jaeger/querylist": "^4.2"
+	},
+	"autoload": {
+		"psr-4": {
+			"dasher\\spider\\": "src/"
+		}
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^9.6"
+	}
+}
