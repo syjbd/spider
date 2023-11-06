@@ -31,12 +31,12 @@ class PowerBallNet{
             $item = $obj->rules($rules)->query()->getData();
             $result = $obj->find('.ball')->texts()->all();
             $result = array_slice($result,0,5);
-            $bigResult = $obj->find('.powerball')->text();
-            $result[] = $bigResult;
+            $bigResult = $obj->find('.powerball')->texts();
+            $result[] = $bigResult[0];
             $resultData[] = [
-                'result' => $result,
                 'text' => $item['title'],
                 'date' =>  date('Ymd', strtotime($item['title'])),
+                'result' => $result,
             ];
         }
         return $resultData;

@@ -24,7 +24,9 @@ class PowerBallTest extends TestCase
     public function testPowerBallNet()
     {
         $result = \dasher\spider\Api::getResult('powerBallNet');
-        $this->assertIsArray($result);
+        $this->assertArrayHasKey('result',$result);
+        $this->assertArrayHasKey('date',$result);
+        $this->assertArrayHasKey('text',$result);
         $this->assertTrue(true);
     }
 

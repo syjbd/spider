@@ -1,1 +1,1 @@
-{"version":1,"defects":{"PowerBallTest::testExample":4,"PowerBallTest::testPowerBallNet":3},"times":{"PowerBallTest::testExample":1.926,"PowerBallTest::testPowerBallCom":2.013,"PowerBallTest::testPowerBallNet":1.019}}
+{"version":1,"defects":{"PowerBallTest::testExample":4,"PowerBallTest::testPowerBallNet":3},"times":{"PowerBallTest::testExample":1.926,"PowerBallTest::testPowerBallCom":1.932,"PowerBallTest::testPowerBallNet":1.043}}

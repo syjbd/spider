@@ -33,9 +33,9 @@ class PowerBallCom{
         $i = 0;
         foreach ($res as $powerHtml){
             $obj = QueryList::html($powerHtml);
-            $item['result'] = $obj->find('.item-powerball')->texts()->all();
             $item['text'] = $titleArr[$i];
             $item['date'] = date('Ymd', strtotime($titleArr[$i]));
+            $item['result'] = $obj->find('.item-powerball')->texts()->all();
             $resultData[] = $item;
             $i++;
         }
