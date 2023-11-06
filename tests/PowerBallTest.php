@@ -14,10 +14,16 @@ class PowerBallTest extends TestCase
     /**
      * @throws \dasher\payment\exception\SpiderException
      */
-    public function testExample()
+    public function testPowerBallCom()
     {
-        // 这是一个断言示例
-        $result = \dasher\spider\Api::getResult();
+        $result = \dasher\spider\Api::getResult('powerBallCom');
+        $this->assertIsArray($result);
+        $this->assertTrue(true);
+    }
+
+    public function testPowerBallNet()
+    {
+        $result = \dasher\spider\Api::getResult('powerBallNet');
         $this->assertIsArray($result);
         $this->assertTrue(true);
     }
