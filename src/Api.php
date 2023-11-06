@@ -29,4 +29,8 @@ class Api{
         }
     }
 
+    public static function getGreyhound(){
+
+    }
+
 }
