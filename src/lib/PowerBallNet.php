@@ -41,4 +41,17 @@ class PowerBallNet{
         }
         return $resultData;
     }
+
+    public function getPageDetail($date): array
+    {
+        $date = date('Y-m-d', strtotime($date));
+        $url = str_replace('{date}', $date, $this->detailApiUrl);
+        $ql = $this->getHtml($url);
+        $res =  $ql->find('#ballsAscending .balls .ball')->texts();
+        $res[] = $ql->find('#ballsAscending .balls .powerball')->text();
+        return [
+            'date'      => date('Ymd', strtotime($date)),
+            'result'    => $res,
+        ];
+    }
 }

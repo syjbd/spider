@@ -11,11 +11,12 @@ use QL\QueryList;
 
 class PowerBallCom{
 
-    protected $listApiUrl = 'https://www.powerball.com/previous-results';
-    protected $detailApiUrl = 'https://www.powerball.com/draw-result?gc=powerball&date={date}';
+    protected string $listApiUrl = 'https://www.powerball.com/previous-results';
+    protected string $detailApiUrl = 'https://www.powerball.com/draw-result?gc=powerball&date={date}';
 
 
-    protected function getHtml($url){
+    protected function getHtml($url): QueryList
+    {
         return QueryList::get($url);
     }
 
@@ -23,7 +24,8 @@ class PowerBallCom{
     /**
      * @throws SpiderException
      */
-    public function getPageList(){
+    public function getPageList(): array
+    {
         $ql = $this->getHtml($this->listApiUrl);
         $titleArr =  $ql->find('h5')->texts()->all();
 
@@ -40,5 +42,18 @@ class PowerBallCom{
             $i++;
         }
         return $resultData;
+    }
+
+    public function getPageDetail($date): array
+    {
+        $date = date('Y-m-d', strtotime($date));
+        $url = str_replace('{date}', $date, $this->detailApiUrl);
+        $ql = $this->getHtml($url);
+        $res =  $ql->find('.game-ball-group .white-balls')->texts();
+        $res[] = $ql->find('.game-ball-group .powerball')->text();
+        return [
+            'date'      => date('Ymd', strtotime($date)),
+            'result'    => $res,
+        ];
     }
 }

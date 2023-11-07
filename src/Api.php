@@ -17,14 +17,15 @@ class Api{
     /**
      * @throws SpiderException
      */
-    public static function getResult($type='powerBallCom'){
+    public static function getResult($date, $type='powerBallCom',$isDetail=true): array
+    {
         switch ($type){
             case 'powerBallCom':
                 $obj = new PowerBallCom();
-                return $obj->getPageList()[0];
+                return $isDetail ? $obj->getPageDetail($date) : $obj->getPageList();
             case 'powerBallNet':
                 $obj = new PowerBallNet();
-                return $obj->getPageList()[0];
+                return $isDetail ? $obj->getPageDetail($date) : $obj->getPageList();
             default:
                 throw new SpiderException('no this spider object');
         }
