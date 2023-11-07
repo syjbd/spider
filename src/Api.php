@@ -9,6 +9,7 @@ namespace dasher\spider;
 use dasher\payment\exception\SpiderException;
 use dasher\spider\lib\PowerBallCom;
 use dasher\spider\lib\PowerBallNet;
+use dasher\spider\lib\WatchDogGrvOrgAu;
 
 class Api{
 
@@ -29,8 +30,24 @@ class Api{
         }
     }
 
-    public static function getGreyhound(){
-
+    /**
+     * @throws SpiderException
+     */
+    public static function getGreyhound($type, $id=0): array
+    {
+        $obj = new WatchDogGrvOrgAu();
+        switch ($type){
+            case 'trace':
+                return $obj->getTraceList();
+            case 'meeting':
+                return $obj->getMeetingObj($id);
+            case 'race':
+                return $obj->getRaceObj($id);
+            case 'dog':
+                return $obj->getDogObj($id);
+            default:
+                throw new SpiderException('no this spider type',-100);
+        }
     }
 
 }

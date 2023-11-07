@@ -30,10 +30,47 @@ class PowerBallTest extends TestCase
 //        $this->assertTrue(true);
 //    }
 
-    public function testWatchDog(){
+//    public function testWatchDogTrace(){
+//        $obj = new \dasher\spider\lib\WatchDogGrvOrgAu();
+//        $result = $obj->getTraceList();
+//        $this->assertArrayHasKey('traceList',$result);
+//        $this->assertArrayHasKey('meetingList',$result);
+//    }
+//
+//    /**
+//     * @throws \dasher\payment\exception\SpiderException
+//     */
+//    public function testWatchDogMeeting(){
+//        $meetingId = 900013492;
+//        $obj = new \dasher\spider\lib\WatchDogGrvOrgAu();
+//        $result = $obj->getMeetingObj($meetingId);
+//        print_r($result);
+//        $this->assertArrayHasKey('meeting',$result);
+//        $this->assertArrayHasKey('races',$result);
+//    }
+
+//    /**
+//     * @throws \dasher\payment\exception\SpiderException
+//     */
+//    public function testWatchDogRace(){
+//        $raceId = 961837841;
+//        $obj = new \dasher\spider\lib\WatchDogGrvOrgAu();
+//        $result = $obj->getRaceObj($raceId);
+//        print_r($result);
+//        $this->assertArrayHasKey('race',$result);
+//        $this->assertArrayHasKey('dogs',$result);
+//    }
+
+    /**
+     * @throws \dasher\payment\exception\SpiderException
+     */
+    public function testWatchDogDog(){
+        $dogId = 360995211;
         $obj = new \dasher\spider\lib\WatchDogGrvOrgAu();
-        $res = $obj->getTraceJson()->getTraceList();
-        print_r($res->getData('traceList'));
-        print_r($res->getData('meetingList'));
+        $result = $obj->getDogObj($dogId);
+        $this->assertArrayHasKey('dog_name',$result);
+        $this->assertArrayHasKey('colour',$result);
+        $this->assertArrayHasKey('sex',$result);
+        $this->assertArrayHasKey('breeds',$result);
     }
 }
