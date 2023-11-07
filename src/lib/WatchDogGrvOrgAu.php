@@ -60,7 +60,6 @@ class WatchDogGrvOrgAu{
     public function getMeetingObj($meetingId): array
     {
         $url = str_replace('{meetingId}', $meetingId,$this->meetingDetail);
-        var_dump($url);
         $result = $this->getUrlResponse($url);
         $meetingObj = [
             'source_meeting_id' => $result['meetings'][0]['id'],

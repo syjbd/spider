@@ -60,7 +60,6 @@ class PowerBallTest extends TestCase
         $meetingId = 900013492;
         $obj = new \dasher\spider\lib\WatchDogGrvOrgAu();
         $result = $obj->getMeetingObj($meetingId);
-        print_r($result);
         $this->assertArrayHasKey('meeting',$result);
         $this->assertArrayHasKey('races',$result);
     }
