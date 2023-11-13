@@ -38,6 +38,7 @@ class TheDogsComAu{
                 if(empty($meetingLink)) continue;
                 $meetings = explode('?',$meetingLink);
                 if(empty($meetings[0])) continue;
+                if($meetings[1] == 'trial=true') continue;
                 $linkArr = explode('/', $meetings[0]);
                 if(empty($linkArr[2]) || empty($linkArr[3])) continue;
                 $meetingCode = $linkArr[2];
