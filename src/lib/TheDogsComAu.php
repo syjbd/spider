@@ -116,9 +116,9 @@ class TheDogsComAu{
         }
 
         return [
-            'name'  => $name,
-            'grade' => $grade,
-            'time'  => $time,
+            'race_name' => $name,
+            'grade'     => $grade,
+            'time'      => strtotime($time),
             'round'     => $round,
             'result'    => $result,
             'photo'     => $photo,
