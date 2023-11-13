@@ -67,7 +67,7 @@ class TheDogsComAu{
                 $meeting[] = [
                     'meeting_name'  => $meetingName,
                     'meeting_code'  => $meetingCode,
-                    'meeting_date'  => $meetingDate,
+                    'meeting_ymd'   => (int)date('Ymd',strtotime($meetingDate)),
                     'meeting_link'  => $meetingLink,
                     'meeting_rice'  => $races
                 ];
@@ -79,12 +79,18 @@ class TheDogsComAu{
     public function getRaceDetail($url): array
     {
         $ql = $this->getHtml($url);
+        $meetingName = $ql->find('.meeting-header__meeting .meeting-header__venue .meeting-header__venue__name')->text();
+        $meetingCode = $ql->find('.meeting-header__meeting .meeting-header__venue .meeting-header__venue__state')->text();
+        $meetingYmd = date('Ymd', strtotime($this->getDateFromURL($url)));
         $name = $ql->find('.race-header__info .race-header__info__name')->text();
         $grade = $ql->find('.race-header__info .race-header__info__grade')->text();
         $time = $ql->find('.race-header__info formatted-time')->attr('data-timestamp');
         $round= $ql->find('.race-header .race-box .race-box__number')->text();
+        if(!empty($round)) $round = str_replace('R', '', $round);
         $result= $ql->find('.race-header .race-box .race-box__caption span')->texts()->all();
         $photo = $ql->find('.race-header__media .race-header__media__item--photo')->attr('href');
+        $video = $ql->find('.race-header__media .race-header__media__item--replay')->attr('href');
+
 
         $oddsHls = $ql->find('.race-runners tbody tr')->htmls();
         $raceOdds=[];
@@ -110,13 +116,17 @@ class TheDogsComAu{
         }
 
         return [
-            'name' => $name,
+            'name'  => $name,
             'grade' => $grade,
-            'time' => $time,
-            'round' => $round,
-            'result' => $result,
-            'photo' =>  $photo,
-            'odds' => $raceOdds
+            'time'  => $time,
+            'round'     => $round,
+            'result'    => $result,
+            'photo'     => $photo,
+            'video'     => $video,
+            'meeting_ymd'   => $meetingYmd,
+            'meeting_name'  => $meetingName,
+            'meeting_code'  => $meetingCode,
+            'odds'          => $raceOdds
         ];
     }
 
@@ -146,5 +156,19 @@ class TheDogsComAu{
         } else {
             throw new SpiderException('Failed to download image', -100);
         }
+    }
+
+    protected function getDateFromURL($url) {
+        // 解析 URL 以获取 path 部分
+        $path = parse_url($url, PHP_URL_PATH);
+        // 使用 '/' 分割 path
+        $path_parts = explode('/', $path);
+        // 检查分割出的部分，找到日期
+        foreach ($path_parts as $part) {
+            if (preg_match('/\d{4}-\d{2}-\d{2}/',$part)) {
+                return $part;
+            }
+        }
+        return null;
     }
 }

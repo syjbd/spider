@@ -98,6 +98,13 @@ class PowerBallTest extends TestCase
         $result = $obj->getTraceList();
         $this->assertIsArray($result);
 
+        $this->assertArrayHasKey('meeting_name',$result[0]);
+        $this->assertArrayHasKey('meeting_code',$result[0]);
+        $this->assertArrayHasKey('meeting_ymd',$result[0]);
+        $this->assertArrayHasKey('meeting_link',$result[0]);
+        $this->assertArrayHasKey('meeting_rice',$result[0]);
+
+
         $result = $obj->getRaceDetail($url);
         print_r($result);
         $this->assertArrayHasKey('name',$result);
@@ -106,6 +113,7 @@ class PowerBallTest extends TestCase
         $this->assertArrayHasKey('round',$result);
         $this->assertArrayHasKey('result',$result);
         $this->assertArrayHasKey('photo',$result);
+        $this->assertArrayHasKey('video',$result);
         $this->assertArrayHasKey('odds',$result);
 
         $this->assertIsArray($result['odds']);
