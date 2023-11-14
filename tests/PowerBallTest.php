@@ -124,11 +124,19 @@ class PowerBallTest extends TestCase
 //        $this->assertArrayHasKey('dog_link',$result['odds'][0]);
 //        $this->assertArrayHasKey('odds',$result['odds'][0]);
 
-        $url = 'https://www.thedogs.com.au/videos/watch/races/1101808/replay';
-        $result = $obj->getVideoUrl($url);
-        var_dump($result);
+//        $url = 'https://www.thedogs.com.au/videos/watch/races/1101808/replay';
+//        $result = $obj->getVideoUrl($url);
+//        var_dump($result);
 //        $photo = '/attachments/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCRVgrQVFFPSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--f4f478eb7c329441969584ed7db9f488cdb068aa/2023-1011-04.jpg';
 //        $obj->downPhoto($photo, '');
+
+        $url = 'https://d2w8yyjcswa0zt.cloudfront.net/c4p343q1pztp3de893mqe8xe2kmv.m3u8';
+        $url = 'https://d2w8yyjcswa0zt.cloudfront.net/c4p343q1pztp3de893mqe8xe2kmv/400.m3u8';
+        $obj = new \dasher\spider\lib\M3u8Down();
+        $result = $obj->setSourceUrl($url)->setBaseUrl('https://d2w8yyjcswa0zt.cloudfront.net/c4p343q1pztp3de893mqe8xe2kmv/')->replaceVideoContent();
+        $obj = $obj->setSavePath('tests/')->writeVideoFile($result, 'test.m3u8');
+        var_dump($result);
+
     }
 
 //    public function testM3u8Down(){

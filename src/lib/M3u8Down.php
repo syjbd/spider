@@ -15,6 +15,7 @@ class M3u8Down{
 
     protected string $url;
     protected string $savePath = "./";
+    protected string $baseUrl = '';
 
 
     protected array $proxyList = [];
@@ -37,13 +38,37 @@ class M3u8Down{
         }
     }
 
+    public function setBaseUrl($baseUrl): M3u8Down
+    {
+        if(!empty($baseUrl)) $this->baseUrl = $baseUrl;
+        return $this;
+    }
+
+    /**
+     * @throws GuzzleException
+     */
+    public function getFile(): string
+    {
+        $config = [];
+        if($this->proxyList){
+            $config['proxy'] =  $this->proxyList[rand(0,count($this->proxyList)-1)];
+        }
+        $client = new \GuzzleHttp\Client($config);
+        $response = $client->get($this->url,[
+            'verify' => false,
+            'http_errors' => false,
+            'Content-Type' => 'application/vnd.apple.mpegurl',
+        ]);
+        return (string)$response->getBody();
+    }
+
     /**
      * @throws GuzzleException
      * @throws SpiderException
      */
-    public function downFile($sourceUrl, $fileName): string
+    public function downFile($sourceUrl, $fileName, $config=[]): string
     {
-        $client = new Client([
+        $option = [
             'timeout'  => 30,
             'verify' => false,
             'http_errors' => false,
@@ -54,7 +79,9 @@ class M3u8Down{
                 'protocols'       => ['http', 'https'], // only allow https URLs
                 'track_redirects' => true
             ]
-        ]);
+        ];
+        $option = array_merge($option, $config);
+        $client = new Client($option);
         $response = $client->get($sourceUrl, [
             RequestOptions::SINK => $this->savePath . $fileName,
         ]);
@@ -70,17 +97,8 @@ class M3u8Down{
      * @throws SpiderException
      */
     public function down(){
-
-        $client = new \GuzzleHttp\Client([
-//                'proxy' => $this->proxyList[rand(0,count($this->proxyList)-1)],
-        ]);
-        $response = $client->get($this->url,[
-            'verify' => false,
-            'http_errors' => false,
-            'Content-Type' => 'application/vnd.apple.mpegurl',
-        ]);
         $this->downFile($this->url, basename($this->url));
-        $content = (string)$response->getBody();
+        $content = $this->getFile();
         if (preg_match_all('/(http|https):\/\/.*/', $content, $matches)
             || preg_match_all('/.+\.ts/', $content, $matches)) {
             $count = count($matches[0]);
@@ -96,5 +114,56 @@ class M3u8Down{
                 }
             }
         }
+    }
+
+    /**
+     * @throws GuzzleException
+     */
+    public function formatListVideo(): array
+    {
+        $content = $this->getFile();
+        $lines = explode("\n",$content);
+        $urls = [];
+        foreach ($lines as $line) {
+            if (substr($line, 0, 1) === '#' || strlen(trim($line)) === 0) continue;
+            $urls[] = $this->baseUrl . $line;
+        }
+        return $urls;
+    }
+
+    /**
+     * @throws GuzzleException
+     */
+    public function replaceVideoContent(): string
+    {
+        $content = $this->getFile();
+        $lines = explode("\n",$content);
+        $content = "";
+        foreach ($lines as $line) {
+            if (substr($line, 0, 1) === '#' || strlen(trim($line)) === 0) {
+                $content .= $line . "\n";
+            }else{
+                if(strstr($line,$this->baseUrl)){
+                    $content .= $line . "\n";
+                }else{
+                    $content .= $this->baseUrl . $line . "\n";
+                }
+            }
+        }
+        return $content;
+    }
+
+    /**
+     * @throws SpiderException
+     */
+    public function writeVideoFile(string $content, string $fineName): string
+    {
+        $file = fopen($this->savePath . $fineName, "w");
+        if(!$file) {
+            throw new SpiderException("Unable to open file", -100);
+        }
+        fwrite($file, $content);
+        fclose($file);
+        return $this->savePath . $fineName;
     }
 }

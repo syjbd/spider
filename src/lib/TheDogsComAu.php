@@ -131,9 +131,42 @@ class TheDogsComAu{
         ];
     }
 
+    /**
+     * @throws GuzzleException
+     * @throws SpiderException
+     */
     public function getVideoUrl($url){
         $ql = $this->getHtml($url);
-        return $ql->find('.page__layout .video__iframe iframe')->attr('src');
+        $video = $ql->find('.page__layout .video__iframe iframe')->attr('src');
+        if(empty($video)){
+            //https://www.thedogs.com.au/videos/watch/races/1101949/replay
+            $url = str_replace('https://www.thedogs.com.au/videos/watch/races/', '', $url);
+            $id = str_replace('/replay', '', $url);
+            $videoUrl = "https://www.thedogs.com.au/api/videos/player/source/race-replay/{$id}";
+            $client = new Client([
+                'timeout'  => 30,
+                'verify' => false,
+                'http_errors' => false,
+                'allow_redirects' => [
+                    'max'             => 10,       // allow at most 10 redirects.
+                    'strict'          => true,     // use "strict" RFC compliant redirects.
+                    'referer'         => true,     // add a Referer header
+                    'protocols'       => ['http', 'https'], // only allow https URLs
+                    'track_redirects' => true
+                ]
+            ]);
+            $response = $client->get($videoUrl);
+            $content = (string)$response->getBody();
+            if (empty($content)) {
+                throw new SpiderException('video url get failed',-100);
+            }
+            $result = json_decode($content, true);
+            if(!empty($result['meta']['status']) && $result['meta']['status']==200 && $result['video']['src']){
+                return $result['video']['src'];
+            }
+            throw new SpiderException('video url api failed',-100);
+        }
+        return $video;
     }
 
     /**
