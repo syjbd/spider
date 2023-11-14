@@ -6,7 +6,7 @@
  */
 namespace dasher\spider;
 
-use dasher\payment\exception\SpiderException;
+use dasher\spider\exception\SpiderException;
 use dasher\spider\lib\PowerBallCom;
 use dasher\spider\lib\PowerBallNet;
 use dasher\spider\lib\WatchDogGrvOrgAu;

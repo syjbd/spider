@@ -6,7 +6,7 @@
  */
 namespace dasher\spider\lib;
 
-use dasher\payment\exception\SpiderException;
+use dasher\spider\exception\SpiderException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;

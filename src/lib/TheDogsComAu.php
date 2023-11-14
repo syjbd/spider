@@ -5,7 +5,7 @@
  * @time 2023/11/8 18:37
  */
 namespace dasher\spider\lib;
-use dasher\payment\exception\SpiderException;
+use dasher\spider\exception\SpiderException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
