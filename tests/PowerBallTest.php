@@ -131,6 +131,7 @@ class PowerBallTest extends TestCase
 //        $obj->downPhoto($photo, '');
         $url = "https://www.thedogs.com.au/videos/watch/races/1101808/replay";
         $url = "https://www.thedogs.com.au/videos/watch/races/1101953/replay";
+        $url = "https://www.thedogs.com.au/videos/watch/races/1101949/replay";
 
         $result = $obj->getVideoUrl($url);
         var_dump($result);

@@ -142,18 +142,7 @@ class TheDogsComAu{
             $videoUrl = str_replace('https://www.thedogs.com.au/videos/watch/races/', '', $url);
             $id = str_replace('/replay', '', $videoUrl);
             $videoUrl = "https://www.thedogs.com.au/api/videos/player/source/race-replay/{$id}";
-            $client = new Client([
-                'timeout'  => 30,
-                'verify' => false,
-                'http_errors' => false,
-                'allow_redirects' => [
-                    'max'             => 10,       // allow at most 10 redirects.
-                    'strict'          => true,     // use "strict" RFC compliant redirects.
-                    'referer'         => true,     // add a Referer header
-                    'protocols'       => ['http', 'https'], // only allow https URLs
-                    'track_redirects' => true
-                ]
-            ]);
+
             $headers = [
                 'authority' => 'www.thedogs.com.au',
                 'accept' => '*/*',
@@ -170,8 +159,20 @@ class TheDogsComAu{
 //                'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
                 'x-requested-with' => 'XMLHttpRequest'
             ];
+            $client = new Client();
             $response = $client->request('GET', $videoUrl,[
-                'headers' => $headers
+                'timeout'  => 30,
+                'verify' => false,
+                'http_errors' => false,
+                'allow_redirects' => [
+                    'max'             => 10,       // allow at most 10 redirects.
+                    'strict'          => true,     // use "strict" RFC compliant redirects.
+                    'referer'         => true,     // add a Referer header
+                    'protocols'       => ['http', 'https'], // only allow https URLs
+                    'track_redirects' => true
+                ],
+                'headers' => $headers,
+
             ]);
             $content = (string)$response->getBody();
             if (empty($content)) {
