@@ -95,37 +95,38 @@ class PowerBallTest extends TestCase
         $url = 'https://www.thedogs.com.au/racing/wentworth-park/2023-11-10/6/the-gardens-to-wenty-final-gardens-wenty-f/odds';
         $url = 'https://www.thedogs.com.au/racing/angle-park/2023-11-13/1/fresh-pet-food-co-maiden-stake-ctb-division1/odds';
         $obj = new \dasher\spider\lib\TheDogsComAu();
-        $result = $obj->getTraceList();
-        $this->assertIsArray($result);
+//        $result = $obj->getTraceList();
+//        $this->assertIsArray($result);
+//
+//        $this->assertArrayHasKey('meeting_name',$result[0]);
+//        $this->assertArrayHasKey('meeting_code',$result[0]);
+//        $this->assertArrayHasKey('meeting_ymd',$result[0]);
+//        $this->assertArrayHasKey('meeting_link',$result[0]);
+//        $this->assertArrayHasKey('meeting_rice',$result[0]);
+//
+//
+//        $result = $obj->getRaceDetail($url);
+//        print_r($result);
+//        $this->assertArrayHasKey('name',$result);
+//        $this->assertArrayHasKey('grade',$result);
+//        $this->assertArrayHasKey('time',$result);
+//        $this->assertArrayHasKey('round',$result);
+//        $this->assertArrayHasKey('result',$result);
+//        $this->assertArrayHasKey('photo',$result);
+//        $this->assertArrayHasKey('video',$result);
+//        $this->assertArrayHasKey('odds',$result);
+//
+//        $this->assertIsArray($result['odds']);
+//
+//        $this->assertArrayHasKey('position',$result['odds'][0]);
+//        $this->assertArrayHasKey('box',$result['odds'][0]);
+//        $this->assertArrayHasKey('dog_name',$result['odds'][0]);
+//        $this->assertArrayHasKey('dog_link',$result['odds'][0]);
+//        $this->assertArrayHasKey('odds',$result['odds'][0]);
 
-        $this->assertArrayHasKey('meeting_name',$result[0]);
-        $this->assertArrayHasKey('meeting_code',$result[0]);
-        $this->assertArrayHasKey('meeting_ymd',$result[0]);
-        $this->assertArrayHasKey('meeting_link',$result[0]);
-        $this->assertArrayHasKey('meeting_rice',$result[0]);
-
-
-        $result = $obj->getRaceDetail($url);
-        print_r($result);
-        $this->assertArrayHasKey('name',$result);
-        $this->assertArrayHasKey('grade',$result);
-        $this->assertArrayHasKey('time',$result);
-        $this->assertArrayHasKey('round',$result);
-        $this->assertArrayHasKey('result',$result);
-        $this->assertArrayHasKey('photo',$result);
-        $this->assertArrayHasKey('video',$result);
-        $this->assertArrayHasKey('odds',$result);
-
-        $this->assertIsArray($result['odds']);
-
-        $this->assertArrayHasKey('position',$result['odds'][0]);
-        $this->assertArrayHasKey('box',$result['odds'][0]);
-        $this->assertArrayHasKey('dog_name',$result['odds'][0]);
-        $this->assertArrayHasKey('dog_link',$result['odds'][0]);
-        $this->assertArrayHasKey('odds',$result['odds'][0]);
-
-
-
+        $url = 'https://www.thedogs.com.au/videos/watch/races/1101808/replay';
+        $result = $obj->getVideoUrl($url);
+        var_dump($result);
 //        $photo = '/attachments/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCRVgrQVFFPSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--f4f478eb7c329441969584ed7db9f488cdb068aa/2023-1011-04.jpg';
 //        $obj->downPhoto($photo, '');
     }

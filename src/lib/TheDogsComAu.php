@@ -131,6 +131,11 @@ class TheDogsComAu{
         ];
     }
 
+    public function getVideoUrl($url){
+        $ql = $this->getHtml($url);
+        return $ql->find('.page__layout .video__iframe iframe')->attr('src');
+    }
+
     /**
      * @throws GuzzleException
      * @throws SpiderException
