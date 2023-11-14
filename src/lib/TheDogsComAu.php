@@ -144,9 +144,9 @@ class TheDogsComAu{
             $videoUrl = "https://www.thedogs.com.au/api/videos/player/source/race-replay/{$id}";
 
             $headers = [
-                'authority' => 'www.thedogs.com.au',
-                'accept' => '*/*',
-                'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,pt;q=0.6',
+//                'authority' => 'www.thedogs.com.au',
+//                'accept' => '*/*',
+//                'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,pt;q=0.6',
 //                'cookie' => '_gcl_au=1.1.563255627.1698888949; _fbp=fb.2.1698888949032.886079309; _gid=GA1.3.247076553.1699859090; _tq_id.TV-27091818-1.5204=3c038a2d256c5785.1698888950.0.1699949165..; _ga=GA1.1.531277589.1698888948; _ga_15MRFN89TV=GS1.1.1699949144.21.1.1699950167.60.0.0',
                 'referer' => $url,
 //                'sec-ch-ua' => '"Google Chrome";v="119", "Chromium";v="119", "Not?A_Brand";v="24"',
@@ -154,7 +154,7 @@ class TheDogsComAu{
 //                'sec-ch-ua-platform' => '"Windows"',
 //                'sec-fetch-dest' => 'empty',
 //                'sec-fetch-mode' => 'cors',
-                'sec-fetch-site' => 'same-origin',
+//                'sec-fetch-site' => 'same-origin',
 //                'If-None-Match' => 'W/"9211bb06278fe7e67f806586213d4c47"',
 //                'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
                 'x-requested-with' => 'XMLHttpRequest'
