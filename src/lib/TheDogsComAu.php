@@ -139,9 +139,8 @@ class TheDogsComAu{
         $ql = $this->getHtml($url);
         $video = $ql->find('.page__layout .video__iframe iframe')->attr('src');
         if(empty($video)){
-            //https://www.thedogs.com.au/videos/watch/races/1101949/replay
-            $url = str_replace('https://www.thedogs.com.au/videos/watch/races/', '', $url);
-            $id = str_replace('/replay', '', $url);
+            $videoUrl = str_replace('https://www.thedogs.com.au/videos/watch/races/', '', $url);
+            $id = str_replace('/replay', '', $videoUrl);
             $videoUrl = "https://www.thedogs.com.au/api/videos/player/source/race-replay/{$id}";
             $client = new Client([
                 'timeout'  => 30,
@@ -155,7 +154,25 @@ class TheDogsComAu{
                     'track_redirects' => true
                 ]
             ]);
-            $response = $client->get($videoUrl);
+            $headers = [
+                'authority' => 'www.thedogs.com.au',
+                'accept' => '*/*',
+                'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,pt;q=0.6',
+//                'cookie' => '_gcl_au=1.1.563255627.1698888949; _fbp=fb.2.1698888949032.886079309; _gid=GA1.3.247076553.1699859090; _tq_id.TV-27091818-1.5204=3c038a2d256c5785.1698888950.0.1699949165..; _ga=GA1.1.531277589.1698888948; _ga_15MRFN89TV=GS1.1.1699949144.21.1.1699950167.60.0.0',
+                'referer' => $url,
+//                'sec-ch-ua' => '"Google Chrome";v="119", "Chromium";v="119", "Not?A_Brand";v="24"',
+//                'sec-ch-ua-mobile' => '?0',
+//                'sec-ch-ua-platform' => '"Windows"',
+//                'sec-fetch-dest' => 'empty',
+//                'sec-fetch-mode' => 'cors',
+                'sec-fetch-site' => 'same-origin',
+//                'If-None-Match' => 'W/"9211bb06278fe7e67f806586213d4c47"',
+//                'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+                'x-requested-with' => 'XMLHttpRequest'
+            ];
+            $response = $client->request('GET', $videoUrl,[
+                'headers' => $headers
+            ]);
             $content = (string)$response->getBody();
             if (empty($content)) {
                 throw new SpiderException('video url get failed',-100);
