@@ -135,8 +135,8 @@ class TheDogsComAu{
      * @throws GuzzleException
      * @throws SpiderException
      */
-    public function downPhoto($url, $savePath){
-        $client = new Client([
+    public function downPhoto($url, $savePath, $config){
+        $option = [
             'base_uri' => $this->baseUrl,
             'timeout'  => 2.0,
             'verify' => false,
@@ -148,7 +148,9 @@ class TheDogsComAu{
                 'protocols'       => ['http', 'https'], // only allow https URLs
                 'track_redirects' => true
             ]
-        ]);
+        ];
+        $option = array_merge($option, $config);
+        $client = new Client($option);
         $response = $client->get($url, [
             RequestOptions::SINK => $savePath,
         ]);
