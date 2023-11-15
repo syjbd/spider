@@ -6,7 +6,7 @@
  */
 namespace dasher\spider\lib;
 
-use dasher\payment\exception\SpiderException;
+use dasher\spider\exception\SpiderException;
 use QL\QueryList;
 
 class PowerBallCom{

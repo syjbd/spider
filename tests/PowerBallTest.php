@@ -94,6 +94,7 @@ class PowerBallTest extends TestCase
         $url = 'https://www.thedogs.com.au/racing/townsville/2023-11-10/1/burdekin-vet-services/odds';
         $url = 'https://www.thedogs.com.au/racing/wentworth-park/2023-11-10/6/the-gardens-to-wenty-final-gardens-wenty-f/odds';
         $url = 'https://www.thedogs.com.au/racing/angle-park/2023-11-13/1/fresh-pet-food-co-maiden-stake-ctb-division1/odds';
+        $url = 'https://www.thedogs.com.au/racing/townsville/2023-11-14/11/heath-ardle/odds';
         $obj = new \dasher\spider\lib\TheDogsComAu();
 //        $result = $obj->getTraceList();
 //        $this->assertIsArray($result);
@@ -104,9 +105,9 @@ class PowerBallTest extends TestCase
 //        $this->assertArrayHasKey('meeting_link',$result[0]);
 //        $this->assertArrayHasKey('meeting_rice',$result[0]);
 //
-//
-//        $result = $obj->getRaceDetail($url);
-//        print_r($result);
+
+        $result = $obj->getRaceDetail($url);
+        print_r($result);
 //        $this->assertArrayHasKey('name',$result);
 //        $this->assertArrayHasKey('grade',$result);
 //        $this->assertArrayHasKey('time',$result);

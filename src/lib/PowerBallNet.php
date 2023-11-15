@@ -6,19 +6,20 @@
  */
 namespace dasher\spider\lib;
 
-use dasher\payment\exception\SpiderException;
 use QL\QueryList;
 
 class PowerBallNet{
 
-    protected $listApiUrl = 'https://www.powerball.net/numbers/';
-    protected $detailApiUrl = 'https://www.powerball.net/numbers/{date}';
+    protected string $listApiUrl = 'https://www.powerball.net/numbers/';
+    protected string $detailApiUrl = 'https://www.powerball.net/numbers/{date}';
 
-    protected function getHtml($url){
-        return QueryList::get($url);
+    protected function getHtml($url): QueryList
+    {
+        return (new \QL\QueryList)->get($url);
     }
 
-    public function getPageList(){
+    public function getPageList(): array
+    {
         $ql = $this->getHtml($this->listApiUrl);
         $res =  $ql->find('.marginBottomMed')->htmls()->all();
         $resultData = [];
