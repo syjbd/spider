@@ -88,7 +88,10 @@ class TheDogsComAu{
         $time = $ql->find('.race-header__info formatted-time')->attr('data-timestamp');
         $round= $ql->find('.race-header .race-box .race-box__number')->text();
         if(!empty($round)) $round = str_replace('R', '', $round);
-        $result= $ql->find('.race-header .race-box .race-box__caption span')->texts()->all();
+        $result= $ql->find('.race-header .race-box .race-box__caption span')->text();
+        if($result !== 'ABD'){
+            $result= $ql->find('.race-header .race-box .race-box__caption span')->texts()->all();
+        }
         $photo = $ql->find('.race-header__media .race-header__media__item--photo')->attr('href');
         $video = $ql->find('.race-header__media .race-header__media__item--replay')->attr('href');
 

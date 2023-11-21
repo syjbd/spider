@@ -25,6 +25,7 @@ class GreyhoundTest extends TestCase
 //        $meetingId = 900013492;
 //        $obj = new \dasher\spider\lib\WatchDogGrvOrgAu();
 //        $result = $obj->getMeetingObj($meetingId);
+//        var_dump($result);
 //        $this->assertArrayHasKey('meeting',$result);
 //        $this->assertArrayHasKey('races',$result);
 //    }
@@ -53,26 +54,35 @@ class GreyhoundTest extends TestCase
 //        $this->assertArrayHasKey('breeds',$result);
 //    }
 
-
-    public function testTheDogCom(){
-        $url = 'https://www.thedogs.com.au/racing/townsville/2023-11-10/4/ingham-road-seafood?trial=false';
-        $url = 'https://www.thedogs.com.au/racing/townsville/2023-11-10/1/burdekin-vet-services/odds';
-        $url = 'https://www.thedogs.com.au/racing/wentworth-park/2023-11-10/6/the-gardens-to-wenty-final-gardens-wenty-f/odds';
-        $url = 'https://www.thedogs.com.au/racing/angle-park/2023-11-13/1/fresh-pet-food-co-maiden-stake-ctb-division1/odds';
-        $url = 'https://www.thedogs.com.au/racing/townsville/2023-11-14/11/heath-ardle/odds';
+    public function testTheDogTrace(){
         $obj = new \dasher\spider\lib\TheDogsComAu();
+        $url = "https://www.thedogs.com.au/racing/albion-park/2023-11-20/6/greyhounds-make-great-pets/odds";
+        $result = $obj->getRaceDetail($url);
+        var_dump($result);
+    }
+
+//    public function testTheDogCom(){
+//        $url = 'https://www.thedogs.com.au/racing/townsville/2023-11-10/4/ingham-road-seafood?trial=false';
+//        $url = 'https://www.thedogs.com.au/racing/townsville/2023-11-10/1/burdekin-vet-services/odds';
+//        $url = 'https://www.thedogs.com.au/racing/wentworth-park/2023-11-10/6/the-gardens-to-wenty-final-gardens-wenty-f/odds';
+//        $url = 'https://www.thedogs.com.au/racing/angle-park/2023-11-13/1/fresh-pet-food-co-maiden-stake-ctb-division1/odds';
+//        $url = 'https://www.thedogs.com.au/racing/townsville/2023-11-14/11/heath-ardle/odds';
+//        $obj = new \dasher\spider\lib\TheDogsComAu();
 //        $result = $obj->getTraceList();
+//        var_dump($result);
 //        $this->assertIsArray($result);
-//
+//    }
+
+//    public function testTheDogVideo(){
 //        $this->assertArrayHasKey('meeting_name',$result[0]);
 //        $this->assertArrayHasKey('meeting_code',$result[0]);
 //        $this->assertArrayHasKey('meeting_ymd',$result[0]);
 //        $this->assertArrayHasKey('meeting_link',$result[0]);
 //        $this->assertArrayHasKey('meeting_rice',$result[0]);
 //
-
-        $result = $obj->getRaceDetail($url);
-        print_r($result);
+//
+//        $result = $obj->getRaceDetail($url);
+//        print_r($result);
 //        $this->assertArrayHasKey('name',$result);
 //        $this->assertArrayHasKey('grade',$result);
 //        $this->assertArrayHasKey('time',$result);
@@ -95,12 +105,12 @@ class GreyhoundTest extends TestCase
 //        var_dump($result);
 //        $photo = '/attachments/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCRVgrQVFFPSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--f4f478eb7c329441969584ed7db9f488cdb068aa/2023-1011-04.jpg';
 //        $obj->downPhoto($photo, '');
-        $url = "https://www.thedogs.com.au/videos/watch/races/1101808/replay";
-        $url = "https://www.thedogs.com.au/videos/watch/races/1101953/replay";
-        $url = "https://www.thedogs.com.au/videos/watch/races/1101949/replay";
-
-        $result = $obj->getVideoUrl($url);
-        var_dump($result);
+//        $url = "https://www.thedogs.com.au/videos/watch/races/1101808/replay";
+//        $url = "https://www.thedogs.com.au/videos/watch/races/1101953/replay";
+//        $url = "https://www.thedogs.com.au/videos/watch/races/1101949/replay";
+//
+//        $result = $obj->getVideoUrl($url);
+//        var_dump($result);
 
 //        $url = 'https://d2w8yyjcswa0zt.cloudfront.net/c4p343q1pztp3de893mqe8xe2kmv.m3u8';
 //        $url = 'https://d2w8yyjcswa0zt.cloudfront.net/c4p343q1pztp3de893mqe8xe2kmv/400.m3u8';
@@ -109,7 +119,7 @@ class GreyhoundTest extends TestCase
 //        $obj = $obj->setSavePath('tests/')->writeVideoFile($result, 'test.m3u8');
 //        var_dump($result);
 
-    }
+//    }
 
 //    public function testM3u8Down(){
 //        $url = 'https://d2w8yyjcswa0zt.cloudfront.net/c0i4x27s6cp1didg6361qvf9d81p/8500.m3u8';
