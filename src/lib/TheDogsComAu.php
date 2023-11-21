@@ -82,7 +82,8 @@ class TheDogsComAu{
     {
         $ql = $this->getHtml($url);
         $meetingName = $ql->find('.meeting-header__meeting .meeting-header__venue .meeting-header__venue__name')->text();
-        $meetingCode = $ql->find('.meeting-header__meeting .meeting-header__venue .meeting-header__venue__state')->text();
+        $arr = explode('/',$url);
+        $meetingCode = $arr[2];
         $meetingYmd = date('Ymd', strtotime($this->getDateFromURL($url)));
         $name = $ql->find('.race-header__info .race-header__info__name')->text();
         $grade = $ql->find('.race-header__info .race-header__info__grade')->text();
