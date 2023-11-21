@@ -23,8 +23,9 @@ class TheDogsComAu{
         return (new \QL\QueryList)->get($url);
     }
 
-    public function getTraceList(): array
+    public function getTraceList($date=""): array
     {
+        $this->meetingListUrl .= "/{$date}";
         $ql = $this->getHtml($this->meetingListUrl);
         $areas =  $ql->find('.meeting-grid tbody')->htmls()->all();
         $meeting = [];
