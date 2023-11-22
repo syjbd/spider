@@ -6,6 +6,7 @@
  */
 namespace dasher\spider\lib\lotto_uk;
 
+use dasher\spider\Helper;
 use QL\QueryList;
 
 class LottoParkCom{
@@ -18,6 +19,9 @@ class LottoParkCom{
         return QueryList::get($url);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function getPageDetail(): array
     {
 
@@ -27,9 +31,9 @@ class LottoParkCom{
         $dateText = $ql->find('#lotteryPageTitle')->text();
         $arr = explode('-', $dateText);
         $date = trim($arr[1]);
-        $date = $this->convertToTimestamp($date);
+        $time = $this->convertToTimestamp($date);
         return [
-            'date'      => date('Ymd', $date),
+            'date'      => Helper::dateFormat($time, 'Ymd', 'Europe/Lisbon'),
             'result'    => $res,
         ];
     }

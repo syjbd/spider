@@ -12,6 +12,7 @@ class LottoUkTest extends TestCase{
     public function testLottoPackCom(){
         $obj = new LottoParkCom();
         $result = $obj->getPageDetail();
+        var_dump($result);
         $this->assertIsArray($result);
         $this->assertArrayHasKey('date', $result);
         $this->assertArrayHasKey('result',$result);
@@ -21,6 +22,7 @@ class LottoUkTest extends TestCase{
     public function testNationalLotteryCoUk(){
         $obj = new \dasher\spider\lib\lotto_uk\NationalLotteryCoUk();
         $result = $obj->getPageDetail();
+        var_dump($result);
         $this->assertIsArray($result);
         $this->assertArrayHasKey('date', $result);
         $this->assertArrayHasKey('result',$result);
@@ -30,6 +32,7 @@ class LottoUkTest extends TestCase{
     public function testAgentLottoCom(){
         $obj = new \dasher\spider\lib\lotto_uk\AgentLottoCom();
         $result = $obj->getPageDetail();
+        var_dump($result);
         $this->assertIsArray($result);
         $this->assertArrayHasKey('date', $result);
         $this->assertArrayHasKey('result',$result);

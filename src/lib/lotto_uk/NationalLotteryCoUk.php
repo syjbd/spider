@@ -22,25 +22,18 @@ class NationalLotteryCoUk{
     {
 
         $ql = $this->getHtml($this->apiUrl);
-        $hms =  $ql->find('.table_row_body .list_table')->htmls();
-        $data = [];
-        foreach ($hms as $html){
-            $obj = (new \QL\QueryList)->html($html);
-            $time =  $obj->find('.table_cell_first .table_cell_padding .table_cell_block')->text();
-            $balls = $obj->find('.table_cell_3_width_no_raffle .table_cell_padding .table_cell_block')->text();
-            $bonus = $obj->find('.table_cell_4_width_no_raffle .table_cell_padding .table_cell_block')->text();
-            $res = explode('-', $balls);
-            $result = [];
-            foreach ($res as $item){
-                $result[] = (string) intval(trim($item));
-            }
-            $result[] = (string) intval(trim($bonus));
-            $data[] = [
-                'date' => date('Ymd', strtotime($time)),
-                'result' => $result,
-            ];
+        $time =  $ql->find('.table_row_odd:eq(0) .table_cell_first .table_cell_padding .table_cell_block')->text();
+        $balls = $ql->find('.table_row_odd:eq(0) .table_cell_3_width_no_raffle .table_cell_padding .table_cell_block')->text();
+        $bonus = $ql->find('.table_row_odd:eq(0) .table_cell_4_width_no_raffle .table_cell_padding .table_cell_block')->text();
+        $res = explode('-', $balls);
+        foreach ($res as $item){
+            $result[] = (string) intval(trim($item));
         }
-        return $data[0];
+        $result[] = (string) intval(trim($bonus));
+        return [
+            'date' => date('Ymd', strtotime($time)),
+            'result' => $result,
+        ];
 
     }
 
