@@ -20,20 +20,14 @@ class Client{
     /**
      * @throws SpiderException
      */
-    public function getResult($lottery, $spiderName, $params=[])
+    public function getResult($lottery, $spiderName)
     {
         $className = "\\dasher\\spider\\lib\\{$lottery}\\{$spiderName}";
         if(!class_exists($className)){
             throw new SpiderException('Spider class no exists!', -100);
         }
         $obj = new $className();
-        switch ($lottery){
-            case self::NAMESPACE_POWER_BALL:
-                return $obj->getPageDetail($params['date']);
-            default:
-                return $obj->getPageDetail();
-        }
-
+        return $obj->getPageDetail();
     }
 
 }

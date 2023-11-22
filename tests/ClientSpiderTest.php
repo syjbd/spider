@@ -14,8 +14,8 @@ class ClientSpiderTest extends TestCase{
      */
     public function testClientSpider(){
         $client = new Client();
-        $result1 = $client->getResult(Client::NAMESPACE_POWER_BALL, 'PowerBallCom', ['date'=>'20231120']);
-        $result2 = $client->getResult(Client::NAMESPACE_POWER_BALL, 'PowerBallNet', ['date'=>'20231120']);
+        $result1 = $client->getResult(Client::NAMESPACE_POWER_BALL, 'PowerBallCom');
+        $result2 = $client->getResult(Client::NAMESPACE_POWER_BALL, 'PowerBallNet');
         $this->assertTrue($result1 == $result2);
 
         $result1 = $client->getResult(Client::NAMESPACE_EURO_MILLIONS, 'EuroMillionsCom');
@@ -36,7 +36,6 @@ class ClientSpiderTest extends TestCase{
         $result1 = $client->getResult(Client::NAMESPACE_MEGA_MILLIONS, 'LottoParkCom');
         $result2 = $client->getResult(Client::NAMESPACE_MEGA_MILLIONS, 'MagaYoCom');
         $result3 = $client->getResult(Client::NAMESPACE_MEGA_MILLIONS, 'RedFoxLottoCom');
-        var_dump($result3,$result2,$result1);
         $this->assertTrue($result3 == $result2);
         $this->assertTrue($result1 == $result3);
     }

@@ -12,6 +12,7 @@ class PowerBallNet{
 
     protected string $listApiUrl = 'https://www.powerball.net/numbers/';
     protected string $detailApiUrl = 'https://www.powerball.net/numbers/{date}';
+    protected string $indexUrl = 'https://www.powerball.net/';
 
     protected function getHtml($url): QueryList
     {
@@ -43,7 +44,7 @@ class PowerBallNet{
         return $resultData;
     }
 
-    public function getPageDetail($date): array
+    public function getPageDetailResult($date): array
     {
         if(!$date){
             $date = date('Y-m-d', time());
@@ -60,8 +61,15 @@ class PowerBallNet{
         ];
     }
 
-    public function getResult($date): array
+    public function getPageDetail(): array
     {
-        return $this->getPageDetail($date);
+        $ql = $this->getHtml($this->indexUrl);
+        $dateText = $ql->find('.jackpotMain .date')->text();
+        $balls = $ql->find('.jackpotMain ul:eq(0) .ball')->texts()->all();
+        $balls[] = $ql->find('.jackpotMain ul:eq(0) .powerball')->text();
+        return [
+            'date'      => date('Ymd', strtotime($dateText)),
+            'result'    => $balls,
+        ];
     }
 }

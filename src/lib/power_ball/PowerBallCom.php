@@ -13,6 +13,7 @@ class PowerBallCom{
 
     protected string $listApiUrl = 'https://www.powerball.com/previous-results';
     protected string $detailApiUrl = 'https://www.powerball.com/draw-result?gc=powerball&date={date}';
+    protected string $indexUrl = 'https://www.powerball.com/';
 
 
     protected function getHtml($url): QueryList
@@ -44,7 +45,7 @@ class PowerBallCom{
         return $resultData;
     }
 
-    public function getPageDetail($date=""): array
+    public function getPageDetailResult($date=""): array
     {
         if(!$date){
             $date = date('Y-m-d', time());
@@ -61,8 +62,15 @@ class PowerBallCom{
         ];
     }
 
-    public function getResult($date=""): array
+    public function getPageDetail(): array
     {
-        return $this->getPageDetail($date);
+        $ql = $this->getHtml($this->indexUrl);
+        $dateText = $ql->find('#numbers .number-powerball .card-body h5')->text();
+        $balls = $ql->find('#numbers .number-powerball .card-body .game-ball-group .item-powerball')->texts()->all();
+        return [
+            'date'      => date('Ymd', strtotime($dateText)),
+            'result'    => $balls,
+        ];
     }
+
 }
