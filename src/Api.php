@@ -7,8 +7,8 @@
 namespace dasher\spider;
 
 use dasher\spider\exception\SpiderException;
-use dasher\spider\lib\PowerBallCom;
-use dasher\spider\lib\PowerBallNet;
+use dasher\spider\lib\power_ball\PowerBallCom;
+use dasher\spider\lib\power_ball\PowerBallNet;
 use dasher\spider\lib\WatchDogGrvOrgAu;
 
 class Api{

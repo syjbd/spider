@@ -4,7 +4,7 @@
  * @auhtor Wayne
  * @time 2023/11/6 17:10
  */
-namespace dasher\spider\lib;
+namespace dasher\spider\lib\power_ball;
 
 use QL\QueryList;
 
@@ -45,7 +45,11 @@ class PowerBallNet{
 
     public function getPageDetail($date): array
     {
-        $date = date('Y-m-d', strtotime($date));
+        if(!$date){
+            $date = date('Y-m-d', time());
+        }else{
+            $date = date('Y-m-d', strtotime($date));
+        }
         $url = str_replace('{date}', $date, $this->detailApiUrl);
         $ql = $this->getHtml($url);
         $res =  $ql->find('#ballsAscending .balls .ball')->texts();
@@ -54,5 +58,10 @@ class PowerBallNet{
             'date'      => date('Ymd', strtotime($date)),
             'result'    => $res,
         ];
+    }
+
+    public function getResult($date): array
+    {
+        return $this->getPageDetail($date);
     }
 }

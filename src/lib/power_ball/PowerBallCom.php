@@ -4,7 +4,7 @@
  * @auhtor Wayne
  * @time 2023/11/6 14:37
  */
-namespace dasher\spider\lib;
+namespace dasher\spider\lib\power_ball;
 
 use dasher\spider\exception\SpiderException;
 use QL\QueryList;
@@ -44,9 +44,13 @@ class PowerBallCom{
         return $resultData;
     }
 
-    public function getPageDetail($date): array
+    public function getPageDetail($date=""): array
     {
-        $date = date('Y-m-d', strtotime($date));
+        if(!$date){
+            $date = date('Y-m-d', time());
+        }else{
+            $date = date('Y-m-d', strtotime($date));
+        }
         $url = str_replace('{date}', $date, $this->detailApiUrl);
         $ql = $this->getHtml($url);
         $res =  $ql->find('.game-ball-group .white-balls')->texts();
@@ -55,5 +59,10 @@ class PowerBallCom{
             'date'      => date('Ymd', strtotime($date)),
             'result'    => $res,
         ];
+    }
+
+    public function getResult($date=""): array
+    {
+        return $this->getPageDetail($date);
     }
 }

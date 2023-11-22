@@ -4,8 +4,7 @@
  * @auhtor Wayne
  * @time 2023/11/20 12:17
  */
-use dasher\spider\exception\SpiderException;
-use dasher\spider\lib\PowerBallCom;
+
 use PHPUnit\Framework\TestCase;
 
 class GreyhoundTest extends TestCase

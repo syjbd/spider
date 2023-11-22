@@ -6,7 +6,6 @@
  */
 
 use dasher\spider\exception\SpiderException;
-use dasher\spider\lib\PowerBallCom;
 use PHPUnit\Framework\TestCase;
 
 class PowerBallTest extends TestCase
@@ -32,7 +31,7 @@ class PowerBallTest extends TestCase
 
     public function testPowerBallComDetail(){
         $date = '20230902';
-        $obj = new \dasher\spider\lib\PowerBallCom();
+        $obj = new \dasher\spider\lib\power_ball\PowerBallCom();
         $result = $obj->getPageDetail($date);
         $this->assertArrayHasKey('date',$result);
         $this->assertArrayHasKey('result',$result);
@@ -40,7 +39,7 @@ class PowerBallTest extends TestCase
 
     public function testPowerBallNetDetail(){
         $date = '20230902';
-        $obj = new \dasher\spider\lib\PowerBallNet();
+        $obj = new \dasher\spider\lib\power_ball\PowerBallNet();
         $result = $obj->getPageDetail($date);
         $this->assertArrayHasKey('date',$result);
         $this->assertArrayHasKey('result',$result);
