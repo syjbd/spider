@@ -6,11 +6,12 @@
  */
 
 use dasher\spider\Client;
+use dasher\spider\exception\SpiderException;
 use PHPUnit\Framework\TestCase;
 class ClientSpiderTest extends TestCase{
 
     /**
-     * @throws \dasher\spider\exception\SpiderException
+     * @throws SpiderException
      */
     public function testClientSpider(){
         $client = new Client();

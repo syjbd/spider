@@ -1,5 +1,6 @@
 <?php
 namespace dasher\spider\lib\euro_millions;
+use dasher\spider\Helper;
 use QL\QueryList;
 
 /**
@@ -18,6 +19,9 @@ class RedFoxLottoCom{
         return QueryList::get($url);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function getPageDetail(): array
     {
         $ql = $this->getHtml($this->detailApiUrl);
@@ -25,7 +29,7 @@ class RedFoxLottoCom{
         $result = $ql->find('.ticket-line div')->texts()->all();
         $date = str_replace('EuroMillions Results - ', '', $date);
         return [
-            'date'      => date('Ymd', $this->convertToTimestamp($date)),
+            'date'      => Helper::dateFormat($this->convertToTimestamp($date), 'Ymd', 'Europe/Berlin'),
             'result'    => $result,
         ];
     }
