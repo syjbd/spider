@@ -25,9 +25,13 @@ class LotteryTextsCom{
         $obj = (new \QL\QueryList)->html($html);
         $dateText = $obj->find('.lottery-logo .container .custom-row2 .col-md-4 .lottery-detail .lottery-detail-inner .lottery-date span')->text();
         $result = $obj->find('.lottery-logo .container .custom-row2 .lottery-balls-below .lottery-balls li')->texts()->all();
+        $data = [];
+        foreach ($result as $item){
+            $data[] = (string)intval($item);
+        }
         return [
             'date'      => date('Ymd',strtotime($dateText)),
-            'result'    => $result,
+            'result'    => $data,
         ];
     }
 

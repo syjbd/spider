@@ -28,7 +28,7 @@ class MagaYoCom{
         foreach ($result as $item){
             $vo = parse_url($item);
             parse_str($vo['query'], $queryArr);
-            $data[] = $queryArr['p2'];
+            $data[] = (string)intval($queryArr['p2']);
         }
         $date = trim(explode('(', $dateText)[0]);
         return [

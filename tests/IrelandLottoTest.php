@@ -13,6 +13,7 @@ class IrelandLottoTest extends TestCase
     {
         $obj = new \dasher\spider\lib\ireland_lotto\MagaYoCom();
         $result = $obj->getPageDetail();
+        var_dump($result);
         $this->assertIsArray($result);
         $this->assertArrayHasKey('date', $result);
         $this->assertArrayHasKey('result', $result);
@@ -22,9 +23,18 @@ class IrelandLottoTest extends TestCase
     {
         $obj = new \dasher\spider\lib\ireland_lotto\LotteryTextsCom();
         $result = $obj->getPageDetail();
-        $this->assertIsArray($result);
         var_dump($result);
+        $this->assertIsArray($result);
         $this->assertArrayHasKey('date', $result);
         $this->assertArrayHasKey('result', $result);
+    }
+
+    public function testAgentLottoCom(){
+        $obj = new \dasher\spider\lib\ireland_lotto\AgentLottoCom();
+        $result = $obj->getPageDetail();
+        var_dump($result);
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('date', $result);
+        $this->assertArrayHasKey('result',$result);
     }
 }

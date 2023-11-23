@@ -25,5 +25,13 @@ class EuroMillionsTest extends TestCase{
         $this->assertArrayHasKey('result',$result);
     }
 
+    public function testAgentLottoCom(){
+        $obj = new \dasher\spider\lib\euro_millions\AgentLottoCom();
+        $result = $obj->getPageDetail();
+        var_dump($result);
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('date', $result);
+        $this->assertArrayHasKey('result',$result);
+    }
 
 }
