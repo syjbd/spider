@@ -25,6 +25,12 @@ class EuroMillionsCom{
         $obj = (new \QL\QueryList)->html($html);
         $date = $obj->find(".h2 span:eq(1)")->text();
         $result = $obj->find('.balls li')->texts()->all();
+        if($result[0] == '-'){
+            $html = $ql->find('.wrapSM .box:eq(1)')->html();
+            $obj = (new \QL\QueryList)->html($html);
+            $date = $obj->find(".h2 span:eq(1)")->text();
+            $result = $obj->find('.balls li')->texts()->all();
+        }
         $date = str_replace('- ', '', $date);
         $date = str_replace('st', '', $date);
         return [
