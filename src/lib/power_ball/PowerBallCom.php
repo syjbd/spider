@@ -67,6 +67,8 @@ class PowerBallCom{
         $ql = $this->getHtml($this->indexUrl);
         $dateText = $ql->find('#numbers .number-powerball .card-body h5')->text();
         $balls = $ql->find('#numbers .number-powerball .card-body .game-ball-group .item-powerball')->texts()->all();
+        $play = $ql->find('#numbers .number-powerball .card-body .power-play .multiplier')->text();
+        $balls[] = str_replace('x','', $play);
         return [
             'date'      => date('Ymd', strtotime($dateText)),
             'result'    => $balls,

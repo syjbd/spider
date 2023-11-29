@@ -67,6 +67,7 @@ class PowerBallNet{
         $dateText = $ql->find('.jackpotMain .date')->text();
         $balls = $ql->find('.jackpotMain ul:eq(0) .ball')->texts()->all();
         $balls[] = $ql->find('.jackpotMain ul:eq(0) .powerball')->text();
+        $balls[] = $ql->find('.jackpotMain ul:eq(0) .power-play')->text();
         return [
             'date'      => date('Ymd', strtotime($dateText)),
             'result'    => $balls,

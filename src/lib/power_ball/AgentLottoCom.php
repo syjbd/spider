@@ -22,8 +22,9 @@ class AgentLottoCom{
 
         $ql = $this->getHtml($this->detailApiUrl);
         $res = $ql->find('.results_item_mid .numberList li span')->texts()->all();
+        $res[array_key_last($res)] = str_replace('x','',$res[array_key_last($res)]);
         $dateText = $ql->find('.lott_info .lott_data')->text();
-        $date =str_replace('Draw Date ', '', $dateText);
+        $date = str_replace('Draw Date ', '', $dateText);
         $time = strtotime($date);
         return [
             'date'      => date('Ymd', $time),
