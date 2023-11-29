@@ -24,7 +24,7 @@ class Client{
     {
         $className = "\\dasher\\spider\\lib\\{$lottery}\\{$spiderName}";
         if(!class_exists($className)){
-            throw new SpiderException('Spider class no exists!', -100);
+            throw new SpiderException($className . 'Spider class no exists!', -100);
         }
         $obj = new $className();
         return $obj->getPageDetail();
