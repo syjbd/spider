@@ -33,7 +33,7 @@ class Client{
     /**
      * @throws SpiderException
      */
-    public function getHistory($lottery, $year,$month){
+    public function getHistory($lottery, $year=0,$month=0){
         $className = "\\dasher\\spider\\lib\\{$lottery}\\AgentLottoCom";
         if(!class_exists($className)){
             throw new SpiderException($className . 'Spider class no exists!', -100);
