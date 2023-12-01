@@ -10,7 +10,7 @@ use QL\QueryList;
 
 class AgentLottoCom{
     protected string $detailApiUrl = 'https://www.agentlotto.com/en/results/uk-lotto/';
-    protected string $listApiUrl = 'https://www.agentlotto.com/en/results/lotto-ie/?&month={month}&year={year}';
+    protected string $listApiUrl = 'https://www.agentlotto.com/en/results/uk-lotto/?&month={month}&year={year}';
 
     protected function getHtml($url): QueryList
     {
