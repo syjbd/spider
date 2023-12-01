@@ -30,4 +30,16 @@ class Client{
         return $obj->getPageDetail();
     }
 
+    /**
+     * @throws SpiderException
+     */
+    public function getHistory($lottery, $year,$month){
+        $className = "\\dasher\\spider\\lib\\{$lottery}\\AgentLottoCom";
+        if(!class_exists($className)){
+            throw new SpiderException($className . 'Spider class no exists!', -100);
+        }
+        $obj = new $className();
+        return $obj->getPageList($year, $month);
+    }
+
 }
