@@ -6,17 +6,11 @@
  */
 namespace dasher\spider\lib\ireland_lotto;
 
-use QL\QueryList;
+use dasher\spider\lib\QuerySpider;
 
-class LotteryTextsCom{
+class LotteryTextsCom extends QuerySpider {
 
     protected string $detailApiUrl = 'https://lotterytexts.com/ireland/lotto/';
-
-
-    protected function getHtml($url): QueryList
-    {
-        return QueryList::get($url);
-    }
 
     public function getPageDetail(): array
     {

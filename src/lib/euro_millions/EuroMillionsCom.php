@@ -6,17 +6,11 @@
  */
 namespace dasher\spider\lib\euro_millions;
 
-use QL\QueryList;
+use dasher\spider\lib\QuerySpider;
 
-class EuroMillionsCom{
+class EuroMillionsCom extends QuerySpider {
 
     protected string $detailApiUrl = 'https://www.euro-millions.com/results';
-
-
-    protected function getHtml($url): QueryList
-    {
-        return QueryList::get($url);
-    }
 
     public function getPageDetail(): array
     {

@@ -6,9 +6,10 @@
  */
 namespace dasher\spider\lib\power_ball;
 
+use dasher\spider\lib\QuerySpider;
 use QL\QueryList;
 
-class PowerBallNet{
+class PowerBallNet extends QuerySpider {
 
     protected string $listApiUrl = 'https://www.powerball.net/numbers/';
     protected string $detailApiUrl = 'https://www.powerball.net/numbers/{date}';

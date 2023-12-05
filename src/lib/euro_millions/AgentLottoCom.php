@@ -5,18 +5,11 @@
  * @time 2023/11/22 14:08
  */
 namespace dasher\spider\lib\euro_millions;
+use dasher\spider\lib\QuerySpider;
 
-use QL\QueryList;
-
-class AgentLottoCom{
+class AgentLottoCom extends QuerySpider {
     protected string $detailApiUrl = 'https://www.agentlotto.com/en/results/euromillions/';
     protected string $listApiUrl = 'https://www.agentlotto.com/en/results/euromillions/?&month={month}&year={year}';
-
-
-    protected function getHtml($url): QueryList
-    {
-        return QueryList::get($url);
-    }
 
     public function getPageDetail(): array
     {

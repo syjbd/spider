@@ -6,17 +6,12 @@
  */
 namespace dasher\spider\lib\mega_millions;
 
-use QL\QueryList;
+use dasher\spider\lib\QuerySpider;
 
-class AgentLottoCom{
+class AgentLottoCom extends QuerySpider {
+
     protected string $detailApiUrl = 'https://www.agentlotto.com/en/results/mega-millions/';
-
     protected string $listApiUrl = 'https://www.agentlotto.com/en/results/mega-millions/?&month={month}&year={year}';
-
-    protected function getHtml($url): QueryList
-    {
-        return QueryList::get($url);
-    }
 
     public function getMonths($month=0): array
     {

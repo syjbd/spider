@@ -12,16 +12,10 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\RequestOptions;
 use QL\QueryList;
 
-class TheDogsComAu{
+class TheDogsComAu extends QuerySpider {
 
     protected string $baseUrl = 'https://www.thedogs.com.au/';
     protected string $meetingListUrl = "https://www.thedogs.com.au/racing";
-
-
-    protected function getHtml($url): QueryList
-    {
-        return (new \QL\QueryList)->get($url);
-    }
 
     public function getTraceList($date=""): array
     {

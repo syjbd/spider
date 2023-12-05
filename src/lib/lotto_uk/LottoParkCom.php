@@ -7,17 +7,11 @@
 namespace dasher\spider\lib\lotto_uk;
 
 use dasher\spider\Helper;
-use QL\QueryList;
+use dasher\spider\lib\QuerySpider;
 
-class LottoParkCom{
+class LottoParkCom extends QuerySpider {
 
     protected string $detailApiUrl = 'https://lottopark.com/results/lotto-uk/';
-
-
-    protected function getHtml($url): QueryList
-    {
-        return QueryList::get($url);
-    }
 
     /**
      * @throws \Exception

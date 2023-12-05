@@ -6,20 +6,15 @@
  */
 namespace dasher\spider\lib\lotto_uk;
 
-use QL\QueryList;
+use dasher\spider\lib\QuerySpider;
 
-class AgentLottoCom{
+class AgentLottoCom extends QuerySpider {
+
     protected string $detailApiUrl = 'https://www.agentlotto.com/en/results/uk-lotto/';
     protected string $listApiUrl = 'https://www.agentlotto.com/en/results/uk-lotto/?&month={month}&year={year}';
 
-    protected function getHtml($url): QueryList
-    {
-        return QueryList::get($url);
-    }
-
     public function getPageDetail(): array
     {
-
         $ql = $this->getHtml($this->detailApiUrl);
         $res = $ql->find('.results_item_mid .numberList li span')->texts()->all();
         $dateText = $ql->find('.lott_info .lott_data')->text();

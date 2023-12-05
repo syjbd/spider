@@ -7,17 +7,11 @@
 namespace dasher\spider\lib\mega_millions;
 
 use dasher\spider\Helper;
-use QL\QueryList;
+use dasher\spider\lib\QuerySpider;
 
-class LottoParkCom{
+class LottoParkCom extends QuerySpider {
 
     protected string $detailApiUrl = 'https://lottopark.com/results/mega-millions/';
-
-
-    protected function getHtml($url): QueryList
-    {
-        return QueryList::get($url);
-    }
 
     public function getPageDetail(): array
     {

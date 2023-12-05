@@ -7,27 +7,22 @@
 namespace dasher\spider\lib\power_ball;
 
 use dasher\spider\exception\SpiderException;
+use dasher\spider\lib\QuerySpider;
 use QL\QueryList;
 
-class PowerBallCom{
+class PowerBallCom extends QuerySpider {
 
     protected string $listApiUrl = 'https://www.powerball.com/previous-results';
     protected string $detailApiUrl = 'https://www.powerball.com/draw-result?gc=powerball&date={date}';
     protected string $indexUrl = 'https://www.powerball.com/';
 
 
-    protected function getHtml($url): QueryList
-    {
-        return QueryList::get($url);
-    }
-
-
     /**
      * @throws SpiderException
      */
-    public function getPageList(): array
+    public function getPageList($proxy=""): array
     {
-        $ql = $this->getHtml($this->listApiUrl);
+        $ql = $this->setProxy($proxy)->getHtml($this->listApiUrl);
         $titleArr =  $ql->find('h5')->texts()->all();
 
         $res =  $ql->find('.game-ball-group')->htmls()->all();
@@ -45,7 +40,7 @@ class PowerBallCom{
         return $resultData;
     }
 
-    public function getPageDetailResult($date=""): array
+    public function getPageDetailResult($date="",$proxy=""): array
     {
         if(!$date){
             $date = date('Y-m-d', time());
@@ -53,7 +48,7 @@ class PowerBallCom{
             $date = date('Y-m-d', strtotime($date));
         }
         $url = str_replace('{date}', $date, $this->detailApiUrl);
-        $ql = $this->getHtml($url);
+        $ql = $this->setProxy($proxy)->getHtml($url);
         $res =  $ql->find('.game-ball-group .white-balls')->texts();
         $res[] = $ql->find('.game-ball-group .powerball')->text();
         return [
@@ -62,9 +57,9 @@ class PowerBallCom{
         ];
     }
 
-    public function getPageDetail(): array
+    public function getPageDetail($proxy=""): array
     {
-        $ql = $this->getHtml($this->indexUrl);
+        $ql = $this->setProxy($proxy)->getHtml($this->indexUrl);
         $dateText = $ql->find('#numbers .number-powerball .card-body h5')->text();
         $balls = $ql->find('#numbers .number-powerball .card-body .game-ball-group .item-powerball')->texts()->all();
         $play = $ql->find('#numbers .number-powerball .card-body .power-play .multiplier')->text();

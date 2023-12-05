@@ -6,17 +6,13 @@
  */
 namespace dasher\spider\lib\mega_millions;
 
-use QL\QueryList;
+use dasher\spider\lib\QuerySpider;
 
-class LotteryTextsCom{
+
+class LotteryTextsCom extends QuerySpider {
 
     protected string $detailApiUrl = 'https://lotterytexts.com/multi-states/mega-millions/';
 
-
-    protected function getHtml($url): QueryList
-    {
-        return QueryList::get($url);
-    }
 
     public function getPageDetail(): array
     {

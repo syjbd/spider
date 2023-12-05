@@ -7,17 +7,13 @@
 namespace dasher\spider\lib\power_ball;
 
 use dasher\spider\Helper;
+use dasher\spider\lib\QuerySpider;
 use QL\QueryList;
 
-class LottoParkCom{
+class LottoParkCom extends QuerySpider {
 
     protected string $detailApiUrl = 'https://lottopark.com/results/powerball/';
 
-
-    protected function getHtml($url): QueryList
-    {
-        return QueryList::get($url);
-    }
 
     public function getPageDetail(): array
     {

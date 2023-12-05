@@ -6,17 +6,11 @@
  */
 namespace dasher\spider\lib\ireland_lotto;
 
-use QL\QueryList;
+use dasher\spider\lib\QuerySpider;
 
-class MagaYoCom{
+class MagaYoCom extends QuerySpider {
 
     protected string $detailApiUrl = 'https://www.magayo.com/lotto/ireland/lotto-results/';
-
-
-    protected function getHtml($url): QueryList
-    {
-        return QueryList::get($url);
-    }
 
     public function getPageDetail(): array
     {

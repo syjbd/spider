@@ -6,17 +6,11 @@
  */
 namespace dasher\spider\lib\lotto_uk;
 
-use QL\QueryList;
+use dasher\spider\lib\QuerySpider;
 
-class NationalLotteryCoUk{
+class NationalLotteryCoUk extends QuerySpider {
 
     protected string $apiUrl = 'https://www.national-lottery.co.uk/results/lotto/draw-history';
-
-
-    protected function getHtml($url): QueryList
-    {
-        return QueryList::get($url);
-    }
 
     public function getPageDetail(): array
     {

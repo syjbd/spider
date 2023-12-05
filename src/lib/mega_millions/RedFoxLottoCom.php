@@ -1,7 +1,7 @@
 <?php
 namespace dasher\spider\lib\mega_millions;
 use dasher\spider\Helper;
-use QL\QueryList;
+use dasher\spider\lib\QuerySpider;
 
 /**
  * @desc RedFoxLottoCom.php
@@ -9,15 +9,9 @@ use QL\QueryList;
  * @time 2023/11/22 15:15
  */
 
-class RedFoxLottoCom{
+class RedFoxLottoCom extends QuerySpider {
 
     protected string $detailApiUrl = 'https://redfoxlotto.com/results/mega-millions/';
-
-
-    protected function getHtml($url): QueryList
-    {
-        return QueryList::get($url);
-    }
 
     /**
      * @throws \Exception

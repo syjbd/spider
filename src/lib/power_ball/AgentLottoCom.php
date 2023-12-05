@@ -6,17 +6,14 @@
  */
 namespace dasher\spider\lib\power_ball;
 
-use QL\QueryList;
+use dasher\spider\lib\QuerySpider;
 
-class AgentLottoCom{
+class AgentLottoCom extends QuerySpider {
 
     protected string $detailApiUrl = 'https://www.agentlotto.com/en/results/powerball/';
     protected string $listApiUrl = 'https://www.agentlotto.com/en/results/powerball/?&month={month}&year={year}';
 
-    protected function getHtml($url): QueryList
-    {
-        return QueryList::get($url);
-    }
+
 
     public function getPageDetail(): array
     {
