@@ -16,12 +16,13 @@ class LotteryAddaCom extends QuerySpider{
 
     protected string $listUrl = 'https://api.staging.lotteryadda.com/home/index';
     protected string $infoUrl = "https://api.staging.lotteryadda.com/home/getPlanDetail/<id>";
-
+    protected string $listResultUrl = "https://api.staging.lotteryadda.com/lottery/getOpenIssues?pageNum=<page>&pageSize=<limit>";
+    protected string $infoResultUrl = "https://api.staging.lotteryadda.com/lottery/officeResult/<id>";
     /**
      * @throws GuzzleException
      * @throws SpiderException
      */
-    public function getResult($url)
+    public function getContent($url)
     {
         $options = [
             RequestOptions::VERIFY => false, # disable SSL certificate validation
@@ -44,7 +45,7 @@ class LotteryAddaCom extends QuerySpider{
      */
     public function getList(): array
     {
-        $data = $this->getResult($this->listUrl);
+        $data = $this->getContent($this->listUrl);
         $list = [];
         if(!empty($data['data']['homePlanResult']['lotteryType'][0]['list'])){
             $list = array_merge($data['data']['homePlanResult']['lotteryType'][0]['list'][0]['list']);
@@ -61,7 +62,7 @@ class LotteryAddaCom extends QuerySpider{
      */
     public function getInfo($id){
         $infoUrl =  str_replace('<id>', $id, $this->infoUrl);
-        $data = $this->getResult($infoUrl);
+        $data = $this->getContent($infoUrl);
         if($data['code'] !== 200) throw new SpiderException('Kerala id err');
 //        $lotteryGamePlan = $data['data']['lotteryGamePlan'];
 //        $issueData = [
@@ -93,4 +94,10 @@ class LotteryAddaCom extends QuerySpider{
 //        }
 //        return $data;
 //    }
+
+    public function getResult($id){
+        $infoUrl =  str_replace('<id>', $id, $this->infoResultUrl);
+        $data = $this->getContent($infoUrl);
+        return $data['data'];
+    }
 }
