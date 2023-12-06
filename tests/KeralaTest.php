@@ -20,6 +20,10 @@ class KeralaTest extends TestCase
 
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \dasher\spider\exception\SpiderException
+     */
     public function testLotteryAddaComInfo(){
         $id = 1513;
         $obj = new \dasher\spider\lib\kerala\LotteryAddaCom();
@@ -29,4 +33,14 @@ class KeralaTest extends TestCase
         $this->assertArrayHasKey('lotteryPrizeDetails',$result);
     }
 
+    public function testLotteryAddaComInfoResult(){
+        $id = 1505;
+        $obj = new \dasher\spider\lib\kerala\LotteryAddaCom();
+        $result = $obj->getResult($id);
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('prizeName',$result[0]);
+        $this->assertArrayHasKey('sort',$result[0]);
+        $this->assertArrayHasKey('prizeMoney',$result[0]);
+        $this->assertArrayHasKey('codes',$result[0]);
+    }
 }

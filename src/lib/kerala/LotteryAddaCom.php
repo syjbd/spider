@@ -95,6 +95,10 @@ class LotteryAddaCom extends QuerySpider{
 //        return $data;
 //    }
 
+    /**
+     * @throws GuzzleException
+     * @throws SpiderException
+     */
     public function getResult($id){
         $infoUrl =  str_replace('<id>', $id, $this->infoResultUrl);
         $data = $this->getContent($infoUrl);
