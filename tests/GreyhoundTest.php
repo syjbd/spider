@@ -55,7 +55,7 @@ class GreyhoundTest extends TestCase
 
     public function testTheDogTrace(){
         $obj = new \dasher\spider\lib\TheDogsComAu();
-        $url = "https://www.thedogs.com.au/racing/richmond/2023-12-06/3/grnsw-middle-distance-series-1-3-win/odds";
+        $url = "https://www.thedogs.com.au/racing/shepparton/2023-12-07/6/rejuvenate-stud/odds";
         $result = $obj->getRaceDetail($url);
         var_dump($result);
     }

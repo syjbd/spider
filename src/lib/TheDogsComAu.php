@@ -88,7 +88,13 @@ class TheDogsComAu extends QuerySpider {
         if(!empty($round)) $round = str_replace('R', '', $round);
         $result= $ql->find('.race-header .race-box .race-box__caption span')->text();
         if($result !== 'ABD'){
-            $result= $ql->find('.race-header .race-box .race-box__caption span')->texts()->all();
+            $html= $ql->find('.race-header .race-box .race-box__caption')->html();
+            if($html == '<formatted-time></formatted-time>'){
+                $result = -1;
+            }else{
+                $result= $ql->find('.race-header .race-box .race-box__caption span')->texts()->all();
+            }
+
         }
         $photo = $ql->find('.race-header__media .race-header__media__item--photo')->attr('href');
         $video = $ql->find('.race-header__media .race-header__media__item--replay')->attr('href');
