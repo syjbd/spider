@@ -10,6 +10,7 @@ use dasher\spider\exception\SpiderException;
 use dasher\spider\lib\QuerySpider;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\RequestOptions;
 
 class LotteryAddaCom extends QuerySpider{
@@ -103,5 +104,24 @@ class LotteryAddaCom extends QuerySpider{
         $infoUrl =  str_replace('<id>', $id, $this->infoResultUrl);
         $data = $this->getContent($infoUrl);
         return $data['data'];
+    }
+
+    /**
+     * @throws SpiderException
+     * @throws GuzzleException
+     */
+    public function downFile($url, $saveDir, $saveFile=""): string
+    {
+        if($saveFile){
+            $ext = pathinfo($url, PATHINFO_EXTENSION);
+            $saveFile = md5(uniqid(microtime())) . '.' . $ext;
+        }
+        $savePath = $saveDir . $saveFile;
+        $client = new Client();
+        try {$client->get($url, ['sink' => $savePath]);
+            return $savePath;
+        } catch (RequestException$e) {
+            throw new SpiderException('kerala image get err!');
+        }
     }
 }
