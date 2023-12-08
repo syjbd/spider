@@ -47,11 +47,11 @@ class LotteryAddaCom extends QuerySpider{
     {
         $data = $this->getContent($this->listUrl);
         $list = [];
-        if(!empty($data['data']['homePlanResult']['lotteryType'][0]['list'])){
-            $list = array_merge($data['data']['homePlanResult']['lotteryType'][0]['list'][0]['list']);
+        if(!empty($data['data']['homePlanResult']['lotteryType'][0]['list'][0]['list'])){
+            $list = array_merge($list,$data['data']['homePlanResult']['lotteryType'][0]['list'][0]['list']);
         }
-        if(!empty($data['data']['homePlanResult']['lotteryType'][1]['list'])){
-            $list = array_merge($data['data']['homePlanResult']['lotteryType'][1]['list'][0]['list']);
+        if(!empty($data['data']['homePlanResult']['lotteryType'][0]['list'][1]['list'])){
+            $list = array_merge($list,$data['data']['homePlanResult']['lotteryType'][0]['list'][1]['list']);
         }
         return $list;
     }
