@@ -134,7 +134,7 @@ class LotteryAddaCom extends QuerySpider{
         try {$client->get($url, $option);
             return $savePath;
         } catch (RequestException$e) {
-            throw new SpiderException('kerala image get err!');
+            throw new SpiderException('kerala image get err: ' . $e->getMessage());
         }
     }
 }
