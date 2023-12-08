@@ -112,7 +112,7 @@ class LotteryAddaCom extends QuerySpider{
      */
     public function downFile($url, $saveDir, $saveFile=""): string
     {
-        if($saveFile){
+        if(!$saveFile){
             $ext = pathinfo($url, PATHINFO_EXTENSION);
             $saveFile = md5(uniqid(microtime())) . '.' . $ext;
         }
