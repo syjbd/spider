@@ -110,15 +110,28 @@ class LotteryAddaCom extends QuerySpider{
      * @throws SpiderException
      * @throws GuzzleException
      */
-    public function downFile($url, $saveDir, $saveFile=""): string
+    public function downFile($url, $saveDir, $saveFile="", $config=[]): string
     {
         if(!$saveFile){
             $ext = pathinfo($url, PATHINFO_EXTENSION);
             $saveFile = md5(uniqid(microtime())) . '.' . $ext;
         }
         $savePath = $saveDir . $saveFile;
+        $option = [
+            'verify' => false,
+            'http_errors' => false,
+            'allow_redirects' => [
+                'max' => 10,
+                'strict' => true,
+                'referer' => true,
+                'protocols' => ['http', 'https'],
+                'track_redirects' => true
+            ],
+            'sink' => $savePath
+        ];
+        $option = array_merge($option, $config);
         $client = new Client();
-        try {$client->get($url, ['sink' => $savePath]);
+        try {$client->get($url, $option);
             return $savePath;
         } catch (RequestException$e) {
             throw new SpiderException('kerala image get err!');
