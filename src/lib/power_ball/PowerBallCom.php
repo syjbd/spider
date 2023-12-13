@@ -20,9 +20,9 @@ class PowerBallCom extends QuerySpider {
     /**
      * @throws SpiderException
      */
-    public function getPageList($proxy=""): array
+    public function getPageList($config=[]): array
     {
-        $ql = $this->setProxy($proxy)->getHtml($this->listApiUrl);
+        $ql = $this->setConfig($config)->getHtml($this->listApiUrl);
         $titleArr =  $ql->find('h5')->texts()->all();
 
         $res =  $ql->find('.game-ball-group')->htmls()->all();
@@ -40,7 +40,7 @@ class PowerBallCom extends QuerySpider {
         return $resultData;
     }
 
-    public function getPageDetailResult($date="",$proxy=""): array
+    public function getPageDetailResult($date="",$config=[]): array
     {
         if(!$date){
             $date = date('Y-m-d', time());
@@ -48,7 +48,7 @@ class PowerBallCom extends QuerySpider {
             $date = date('Y-m-d', strtotime($date));
         }
         $url = str_replace('{date}', $date, $this->detailApiUrl);
-        $ql = $this->setProxy($proxy)->getHtml($url);
+        $ql = $this->setConfig($config)->getHtml($url);
         $res =  $ql->find('.game-ball-group .white-balls')->texts();
         $res[] = $ql->find('.game-ball-group .powerball')->text();
         return [
@@ -57,9 +57,9 @@ class PowerBallCom extends QuerySpider {
         ];
     }
 
-    public function getPageDetail($proxy=""): array
+    public function getPageDetail($config=[]): array
     {
-        $ql = $this->setProxy($proxy)->getHtml($this->indexUrl);
+        $ql = $this->setConfig($config)->getHtml($this->indexUrl);
         $dateText = $ql->find('#numbers .number-powerball .card-body h5')->text();
         $balls = $ql->find('#numbers .number-powerball .card-body .game-ball-group .item-powerball')->texts()->all();
         $play = $ql->find('#numbers .number-powerball .card-body .power-play .multiplier')->text();

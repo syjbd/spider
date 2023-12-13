@@ -6,26 +6,35 @@
  */
 namespace dasher\spider\lib;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use QL\QueryList;
 
 class QuerySpider{
 
-    protected string $proxy = "";
+    protected array $config = [
+        'verify' => false,
+        'http_errors' => false,
+        'timeout' => 30,
+        'headers' =>[
+            'Cache-Control' => 'no-cache',
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        ]
+    ];
 
-
-    public function setProxy(string $proxy): QuerySpider
+    public function setConfig($config): QuerySpider
     {
-        $this->proxy = $proxy;
+        $this->config = array_merge($this->config, $config);
         return $this;
     }
 
-
+    /**
+     * @throws GuzzleException
+     */
     protected function getHtml($url): QueryList
     {
-        if(!empty($this->proxy)){
-            return (new \QL\QueryList)->get($url, null, ['proxy' => $this->proxy]);
-        }else{
-            return (new \QL\QueryList)->get($url);
-        }
+        $client = new Client();
+        $res = $client->request('GET', $url, $this->config)->getBody();
+        return  (new \QL\QueryList)->html($res);
     }
 }
