@@ -11,14 +11,17 @@ use dasher\spider\lib\QuerySpider;
 
 class LottoParkCom extends QuerySpider {
 
-    protected string $detailApiUrl = 'https://lottopark.com/results/lotto-uk/';
+    protected string $detailApiUrl = 'https://lottopark.com/results/lotto-uk/<ts>';
 
     /**
      * @throws \Exception
      */
     public function getPageDetail(): array
     {
-
+        if(strstr($this->detailApiUrl, '<ts>')){
+            $t = microtime();
+            $this->detailApiUrl = str_replace('<ts>', "?ts={$t}", $this->detailApiUrl);
+        }
         $ql = $this->getHtml($this->detailApiUrl);
         $res =  $ql->find('.ticket-line .ticket-line-number')->texts()->all();
         $res[] = $ql->find('.ticket-line .ticket-line-bnumber')->text();
