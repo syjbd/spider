@@ -46,4 +46,13 @@ class PowerBallTest extends TestCase
         $this->assertArrayHasKey('date', $result);
         $this->assertArrayHasKey('result',$result);
     }
+
+    public function testLottoIn(){
+        $obj = new \dasher\spider\lib\power_ball\LottoIn();
+        $result = $obj->getPageDetail();
+        var_dump($result);
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('date', $result);
+        $this->assertArrayHasKey('result',$result);
+    }
 }
