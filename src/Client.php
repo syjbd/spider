@@ -27,7 +27,7 @@ class Client{
             throw new SpiderException($className . 'Spider class no exists!', -100);
         }
         $obj = new $className();
-        return $obj->setConfig($config)->setHeaders($headers)->getPageDetail();
+        return $obj->setConfig($config)->getPageDetail();
     }
 
     /**
