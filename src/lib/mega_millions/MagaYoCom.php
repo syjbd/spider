@@ -10,7 +10,7 @@ use dasher\spider\lib\QuerySpider;
 
 class MagaYoCom extends QuerySpider {
 
-    protected string $detailApiUrl = 'https://www.magayo.com/lotto/usa/mega-millions-results/';
+    protected string $detailApiUrl = 'https://www.magayo.com/lotto/usa/mega-millions-results/<ts>';
 
     public function getPageDetail(): array
     {

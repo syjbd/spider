@@ -45,6 +45,10 @@ class QuerySpider{
         if($this->headers){
             $this->config['headers'] = $this->headers;
         }
+        if(strstr($url, '<ts>')){
+            $t = microtime();
+            $url = str_replace('<ts>', "?ts={$t}", $url);
+        }
         $res = $client->request('GET', $url, $this->config)->getBody();
         return  (new \QL\QueryList)->html($res);
     }

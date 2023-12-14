@@ -10,7 +10,7 @@ use dasher\spider\lib\QuerySpider;
 
 class LotteryTextsCom extends QuerySpider {
 
-    protected string $detailApiUrl = 'https://lotterytexts.com/ireland/lotto/';
+    protected string $detailApiUrl = 'https://lotterytexts.com/ireland/lotto/<ts>';
 
     public function getPageDetail(): array
     {

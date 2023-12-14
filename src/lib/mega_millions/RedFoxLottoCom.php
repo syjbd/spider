@@ -11,7 +11,7 @@ use dasher\spider\lib\QuerySpider;
 
 class RedFoxLottoCom extends QuerySpider {
 
-    protected string $detailApiUrl = 'https://redfoxlotto.com/results/mega-millions/';
+    protected string $detailApiUrl = 'https://redfoxlotto.com/results/mega-millions/<ts>';
 
     /**
      * @throws \Exception

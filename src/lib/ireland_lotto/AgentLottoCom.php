@@ -8,7 +8,7 @@ namespace dasher\spider\lib\ireland_lotto;
 
 class AgentLottoCom extends \dasher\spider\lib\power_ball\AgentLottoCom {
 
-    protected string $detailApiUrl = 'https://www.agentlotto.com/en/results/lotto-ie/';
+    protected string $detailApiUrl = 'https://www.agentlotto.com/en/results/lotto-ie/<ts>';
     protected string $listApiUrl = 'https://www.agentlotto.com/en/results/lotto-ie/?&month={month}&year={year}';
 
 

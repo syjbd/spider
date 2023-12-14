@@ -11,7 +11,7 @@ use dasher\spider\lib\QuerySpider;
 
 class LotteryTextsCom extends QuerySpider {
 
-    protected string $detailApiUrl = 'https://lotterytexts.com/multi-states/mega-millions/';
+    protected string $detailApiUrl = 'https://lotterytexts.com/multi-states/mega-millions/<ts>';
 
 
     public function getPageDetail(): array

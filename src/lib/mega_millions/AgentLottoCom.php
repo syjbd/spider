@@ -10,7 +10,7 @@ use dasher\spider\lib\QuerySpider;
 
 class AgentLottoCom extends QuerySpider {
 
-    protected string $detailApiUrl = 'https://www.agentlotto.com/en/results/mega-millions/';
+    protected string $detailApiUrl = 'https://www.agentlotto.com/en/results/mega-millions/<ts>';
     protected string $listApiUrl = 'https://www.agentlotto.com/en/results/mega-millions/?&month={month}&year={year}';
 
     public function getMonths($month=0): array

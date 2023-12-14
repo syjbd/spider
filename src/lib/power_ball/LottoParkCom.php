@@ -12,7 +12,7 @@ use QL\QueryList;
 
 class LottoParkCom extends QuerySpider {
 
-    protected string $detailApiUrl = 'https://lottopark.com/results/powerball/';
+    protected string $detailApiUrl = 'https://lottopark.com/results/powerball/<ts>';
 
 
     public function getPageDetail(): array
