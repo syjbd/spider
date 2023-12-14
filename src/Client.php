@@ -20,14 +20,14 @@ class Client{
     /**
      * @throws SpiderException
      */
-    public function getResult($lottery, $spiderName)
+    public function getResult($lottery, $spiderName, $config=[], $headers=[])
     {
         $className = "\\dasher\\spider\\lib\\{$lottery}\\{$spiderName}";
         if(!class_exists($className)){
             throw new SpiderException($className . 'Spider class no exists!', -100);
         }
         $obj = new $className();
-        return $obj->getPageDetail();
+        return $obj->setConfig($config)->setHeaders($headers)->getPageDetail();
     }
 
     /**
