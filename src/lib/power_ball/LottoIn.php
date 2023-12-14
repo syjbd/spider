@@ -18,7 +18,6 @@ class LottoIn extends QuerySpider
 
         $ql = $this->getHtml($this->detailApiUrl);
         $res = $ql->find('.latest .balls li.resultBall ')->texts()->all();
-        $res[array_key_last($res)] = str_replace('x','',$res[array_key_last($res)]);
         $date = $ql->find('.latest .date')->text();
         $time = strtotime($date);
         return [

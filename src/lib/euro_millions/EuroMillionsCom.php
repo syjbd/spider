@@ -6,6 +6,7 @@
  */
 namespace dasher\spider\lib\euro_millions;
 
+use dasher\spider\exception\SpiderException;
 use dasher\spider\lib\QuerySpider;
 
 class EuroMillionsCom extends QuerySpider {
@@ -19,6 +20,7 @@ class EuroMillionsCom extends QuerySpider {
         $obj = (new \QL\QueryList)->html($html);
         $date = $obj->find(".h2 span:eq(1)")->text();
         $result = $obj->find('.balls li')->texts()->all();
+        if(empty($result[0])) throw new SpiderException('EuroMillionsCom can\'t get result');
         if($result[0] == '-'){
             $html = $ql->find('.wrapSM .box:eq(1)')->html();
             $obj = (new \QL\QueryList)->html($html);
