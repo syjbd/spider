@@ -28,4 +28,14 @@ class Helper{
         $date->setTimezone($tz);
         return $date->format($format);
     }
+
+    public static function rupeeRate($symbol=""){
+        $config = [
+            '$' => 83,
+            '€' => 92,
+            '£' => 106,
+        ];
+        if(!empty($symbol) && !empty($config[$symbol])) return $config[$symbol];
+        return $config;
+    }
 }

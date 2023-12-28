@@ -5,11 +5,28 @@
  * @time 2023/11/22 14:08
  */
 namespace dasher\spider\lib\euro_millions;
+use dasher\spider\Helper;
 use dasher\spider\lib\QuerySpider;
 
 class AgentLottoCom extends QuerySpider {
     protected string $detailApiUrl = 'https://www.agentlotto.com/en/results/euromillions/';
     protected string $listApiUrl = 'https://www.agentlotto.com/en/results/euromillions/?&month={month}&year={year}';
+
+    protected array $optionConfig = [
+        '5+2PB' => '1st',
+        '5+1PB' => '2nd',
+        '5+0PB' => '3rd',
+        '4+2PB' => '4th',
+        '4+1PB' => '5th',
+        '3+2PB' => '6th',
+        '4+0PB' => '7th',
+        '2+2PB' => '8th',
+        '3+1PB' => '9th',
+        '3+0PB' => '10th',
+        '1+2PB' => '11th',
+        '2+1PB' => '12th',
+        '2+0PB' => '13th',
+    ];
 
     public function getPageDetail(): array
     {
@@ -17,11 +34,24 @@ class AgentLottoCom extends QuerySpider {
         $ql = $this->getHtml($this->detailApiUrl);
         $res = $ql->find('.results_item_mid .numberList li span')->texts()->all();
         $dateText = $ql->find('.lott_info .lott_data')->text();
+        $options = $ql->find('.detailed_table:eq(0) tbody');
+        $optionList =$options->find('tr:not(.detailed_table_tot)')->map(function ($tr) {
+            // 返回每个链接的文本和href属性
+            return [
+                'combinations' => $tr->find('td:eq(0)')->text(),
+                'winnings' => $tr->find('td:eq(1)')->text(),
+                'winners' => $tr->find('td:eq(2)')->text(),
+            ];
+        })->all();
+
+
+
         $date =str_replace('Draw Date ', '', $dateText);
         $time = strtotime($date);
         return [
             'date'      => date('Ymd', $time),
             'result'    => $res,
+            'options'   => self::getOptions($this->optionConfig,$optionList)
         ];
     }
 
@@ -71,4 +101,16 @@ class AgentLottoCom extends QuerySpider {
         return $data;
     }
 
+    public static function getOptions($optionConfig, $options, $symbol="$"): array
+    {
+        $data = [];
+        foreach ($options as $option){
+            $option['option']       = $optionConfig[$option['combinations']];
+            $option['symbol']       = $symbol;
+            $option['winnings']     = floatval(str_replace($symbol, '', $option['winnings']));
+            $option['rupee']     = $option['winnings'] * Helper::rupeeRate($symbol);
+            $data[] = $option;
+        }
+        return $data;
+    }
 }

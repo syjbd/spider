@@ -55,4 +55,11 @@ class PowerBallTest extends TestCase
         $this->assertArrayHasKey('date', $result);
         $this->assertArrayHasKey('result',$result);
     }
+
+    public function testPowerBallNetPayout(){
+        $date = '2023-12-16';
+        $obj = new \dasher\spider\lib\power_ball\PowerBallNet();
+        $result = $obj->getPageDetailResult($date);
+        var_dump($result);
+    }
 }

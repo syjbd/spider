@@ -56,9 +56,22 @@ class PowerBallNet extends QuerySpider {
         $ql = $this->getHtml($url);
         $res =  $ql->find('#ballsAscending .balls .ball')->texts();
         $res[] = $ql->find('#ballsAscending .balls .powerball')->text();
+        $payoutTableHtml = $ql->find('.payoutTable')->htmls();
+        $payout = [];
+        foreach ($payoutTableHtml as $key => $html){
+            $trList = QueryList::html($html)->find('tbody tr')->htmls();
+            $payout[$key] = [];
+            foreach ($trList as $item){
+                $val['name'] =  QueryList::html($item)->find('.PrizeName')->text();
+                $val['Prize'] =  QueryList::html($item)->find('.right')->text();
+                $payout[$key] = $val;
+            }
+        }
+
         return [
             'date'      => date('Ymd', strtotime($date)),
             'result'    => $res,
+            'payout'    => $payout
         ];
     }
 
