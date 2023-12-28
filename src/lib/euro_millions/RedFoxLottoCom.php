@@ -13,6 +13,22 @@ class RedFoxLottoCom extends QuerySpider {
 
     protected string $detailApiUrl = 'https://redfoxlotto.com/results/euromillions/<ts>';
 
+    protected array $optionConfig = [
+        'I'     => '1st',
+        'II'    => '2nd',
+        'III'   => '3rd',
+        'IV'    => '4th',
+        'V'     => '5th',
+        'VI'    => '6th',
+        'VII'   => '7th',
+        'VIII'  => '8th',
+        'IX'    => '9th',
+        'X'     => '10th',
+        'XI'    => '11th',
+        'XII'   => '12th',
+        'XIII'  => '13th',
+    ];
+
     /**
      * @throws \Exception
      */
@@ -22,9 +38,23 @@ class RedFoxLottoCom extends QuerySpider {
         $date = $ql->find("#lotteryPageTitle")->text();
         $result = $ql->find('.ticket-line div')->texts()->all();
         $date = str_replace('EuroMillions Results - ', '', $date);
+        $options = $ql->find('.results-detailed-content tbody');
+        $optionList =$options->find('tr')->map(function ($tr) {
+            // 返回每个链接的文本和href属性
+            return [
+                'combinations' => str_replace('&nbsp;','',$tr->find('td:eq(0) .mobile-hide')->text()),
+                'winnings' => $tr->find('td:eq(3) .table-results-detailed-amount')->text(),
+                'winners' => $tr->find('td:eq(2) .table-results-detailed-winners')->text(),
+            ];
+        })->all();
+
+        $options = AgentLottoCom::getOptions($this->optionConfig,$optionList,'€');
+
         return [
             'date'      => Helper::dateFormat($this->convertToTimestamp($date), 'Ymd', 'Europe/Berlin'),
             'result'    => $result,
+            'symbol'    => "€",
+            'options'   => $options
         ];
     }
 

@@ -51,6 +51,7 @@ class AgentLottoCom extends QuerySpider {
         return [
             'date'      => date('Ymd', $time),
             'result'    => $res,
+            'symbol'    => "$",
             'options'   => self::getOptions($this->optionConfig,$optionList)
         ];
     }

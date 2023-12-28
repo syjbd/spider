@@ -44,7 +44,6 @@ class EuroMillionsCom extends QuerySpider {
                 'winners' => $tr->find('td:eq(2)')->text(),
             ];
         })->all();
-        var_dump($optionList);
         return $optionList;
     }
 
@@ -65,10 +64,10 @@ class EuroMillionsCom extends QuerySpider {
         $date = str_replace('- ', '', $date);
         $date = str_replace('st', '', $date);
         $options = $this->getPageOption($date);
-        var_dump($options);
         return [
             'date'      => date('Ymd', strtotime($date)),
             'result'    => $result,
+            'symbol'    => "€",
             'options'   => AgentLottoCom::getOptions($this->optionConfig,$options,'€')
         ];
     }
