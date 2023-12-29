@@ -103,7 +103,7 @@ class AgentLottoCom extends QuerySpider {
         $data = [];
         foreach ($options as $option){
             $option['option']       = $optionConfig[$option['combinations']];
-            $option['winnings']     = floatval(str_replace($symbol, '', $option['winnings']));
+            $option['winnings']     = floatval(str_replace([$symbol,','], '', $option['winnings']));
             $data[] = $option;
         }
         return $data;
