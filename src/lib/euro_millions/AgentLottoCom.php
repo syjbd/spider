@@ -43,9 +43,6 @@ class AgentLottoCom extends QuerySpider {
                 'winners' => $tr->find('td:eq(2)')->text(),
             ];
         })->all();
-
-
-
         $date =str_replace('Draw Date ', '', $dateText);
         $time = strtotime($date);
         return [
@@ -73,7 +70,6 @@ class AgentLottoCom extends QuerySpider {
     {
         $url = str_replace('{year}', $year, $this->listApiUrl);
         $url = str_replace('{month}', $month, $url);
-        var_dump($url);
         $ql = $this->getHtml($url);
         $data = [];
         $res = $ql->find('.oldresults_tbody .oldresults_item .oldresults_item_head')->htmls();
@@ -107,9 +103,7 @@ class AgentLottoCom extends QuerySpider {
         $data = [];
         foreach ($options as $option){
             $option['option']       = $optionConfig[$option['combinations']];
-            $option['symbol']       = $symbol;
             $option['winnings']     = floatval(str_replace($symbol, '', $option['winnings']));
-            $option['rupee']     = $option['winnings'] * Helper::rupeeRate($symbol);
             $data[] = $option;
         }
         return $data;
