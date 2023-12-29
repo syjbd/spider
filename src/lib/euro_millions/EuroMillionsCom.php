@@ -68,7 +68,7 @@ class EuroMillionsCom extends QuerySpider {
             'date'      => date('Ymd', strtotime($date)),
             'result'    => $result,
             'symbol'    => "€",
-            'options'   => $options
+            'options'   => AgentLottoCom::getOptions($this->optionConfig, $options, '€')
         ];
     }
 }
