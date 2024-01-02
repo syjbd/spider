@@ -37,4 +37,13 @@ class IrelandLottoTest extends TestCase
         $this->assertArrayHasKey('date', $result);
         $this->assertArrayHasKey('result',$result);
     }
+
+    public function testLotteryIe(){
+        $obj = new \dasher\spider\lib\ireland_lotto\LotteryIe();
+        $result = $obj->getPageDetail();
+        var_dump($result);
+//        $this->assertIsArray($result);
+//        $this->assertArrayHasKey('date', $result);
+//        $this->assertArrayHasKey('result',$result);
+    }
 }
