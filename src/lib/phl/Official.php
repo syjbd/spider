@@ -53,8 +53,7 @@ class Official extends QuerySpider {
      * @throws SpiderException
      */
     public function getTodayContent(){
-        $url = str_replace('<t>', Helper::currentTimeMillis(), $this->todayUrl);
-        return $this->getContent($url);
+        return $this->getTodayContent();
     }
 
     /**
@@ -68,7 +67,7 @@ class Official extends QuerySpider {
         $size       = !empty($data['size']) ? $data['size'] : 5;
         $gameCode   = !empty($data['game_code']) ? $data['game_code'] : 'all';
         $url = str_replace(['<startTime>','<endTime>','<page>','<size>','<gameCode>','<t>'], [$startTime,$endTime,$page,$size,$gameCode,$t], $this->todayUrl);
-        return $this->getContent($url);
+        return $this->getHistoryContent($url);
     }
 
 }
