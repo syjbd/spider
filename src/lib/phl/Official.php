@@ -60,10 +60,13 @@ class Official extends QuerySpider {
     /**
      * @throws SpiderException
      */
-    public function getHistoryContent($startTime=0, $endTime=0, $page=1, $size=5, $gameCode='all'){
+    public function getHistoryContent($data){
         $t = Helper::currentTimeMillis();
-        if($startTime == 0) $startTime = strtotime(date('Ymd', time()-86400*7)) * 1000;
-        if($endTime == 0) $endTime = strtotime(date('Ymd', time()+86400)) * 1000 -1;
+        $startTime  = !empty($data['start_time']) ? $data['start_time'] : strtotime(date('Ymd', time()-86400*7)) * 1000;
+        $endTime    = !empty($data['end_time']) ? $data['start_time'] : strtotime(date('Ymd', time()+86400)) * 1000 -1;
+        $page       = !empty($data['page']) ? $data['page'] : 1;
+        $size       = !empty($data['size']) ? $data['size'] : 5;
+        $gameCode   = !empty($data['game_code']) ? $data['game_code'] : 'all';
         $url = str_replace(['<startTime>','<endTime>','<page>','<size>','<gameCode>','<t>'], [$startTime,$endTime,$page,$size,$gameCode,$t], $this->todayUrl);
         return $this->getContent($url);
     }
