@@ -67,7 +67,7 @@ class Official extends QuerySpider {
         $page       = !empty($data['page']) ? $data['page'] : 1;
         $size       = !empty($data['size']) ? $data['size'] : 5;
         $gameCode   = !empty($data['game_code']) ? $data['game_code'] : 'all';
-        $url = str_replace(['<startTime>','<endTime>','<page>','<size>','<gameCode>','<t>'], [$startTime,$endTime,$page,$size,$gameCode,$t], $this->todayUrl);
+        $url = str_replace(['<startTime>','<endTime>','<page>','<size>','<gameCode>','<t>'], [$startTime,$endTime,$page,$size,$gameCode,$t], $this->historyUrl);
         return $this->getContent($url);
     }
 
