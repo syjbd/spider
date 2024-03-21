@@ -10,8 +10,13 @@ class DearOfficialTest extends TestCase{
 
     public function testClientSpider(){
         $obj = new \dasher\spider\lib\dear\Official();
-        $res = $obj->getDetail('MD200224', './down/MD200224.pdf');
+        $res = $obj->getDetail('MD030324', './down/MD030324.pdf');
         var_dump($res);
     }
 
+    public function testOfficialPdf(){
+        $obj = new \dasher\spider\lib\kerala\Official();
+        $res = $obj->pdfToText(dirname(__DIR__, 1) . '/src/down/KN-511.pdf');
+        var_dump($res);
+    }
 }

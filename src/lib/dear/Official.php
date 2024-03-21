@@ -47,6 +47,7 @@ class Official extends QuerySpider{
         } catch (GuzzleException $e) {
             throw new SpiderException('Kerala GuzzleHttp err!');
         }
+
         return false;
     }
 

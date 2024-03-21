@@ -38,4 +38,14 @@ class Helper{
         if(!empty($symbol) && !empty($config[$symbol])) return $config[$symbol];
         return $config;
     }
+
+    /**
+     * 获取毫秒时间戳
+     * @return int
+     */
+    public static function currentTimeMillis(): int
+    {
+        list($ms, $sec) = explode(' ', microtime());
+        return (int)sprintf('%.0f', (floatval($ms) + floatval($sec)) * 1000);
+    }
 }

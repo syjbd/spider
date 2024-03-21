@@ -10,3 +10,4 @@
 # VIM Swap Files #
 *.swp
 *.swo
+/*.cache
