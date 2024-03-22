@@ -16,7 +16,8 @@ class PhlOfficialTest extends TestCase{
 
     public function testHistory(){
         $obj = new \dasher\spider\lib\phl\Official();
-        $res = $obj->getHistoryContent();
+        $res = $obj->getHistoryContent([]);
+        var_dump($res);
     }
 
 }
