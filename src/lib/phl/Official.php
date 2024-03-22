@@ -64,7 +64,7 @@ class Official extends QuerySpider {
         $t = Helper::currentTimeMillis();
         $startTime  = !empty($data['start_time']) ? $data['start_time'] : strtotime(date('Ymd', time()-86400*7)) * 1000;
         $endTime    = !empty($data['end_time']) ? $data['end_time'] : strtotime(date('Ymd', time()+86400)) * 1000 -1;
-        $page       = !empty($data['page']) ? $data['page'] : 1;
+        $page       = !empty($data['page']) ? $data['page'] : 0;
         $size       = !empty($data['size']) ? $data['size'] : 5;
         $gameCode   = !empty($data['game_code']) ? $data['game_code'] : 'all';
         $url = str_replace(['<startTime>','<endTime>','<page>','<size>','<gameCode>','<t>'], [$startTime,$endTime,$page,$size,$gameCode,$t], $this->historyUrl);
