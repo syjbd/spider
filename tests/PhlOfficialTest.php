@@ -20,4 +20,9 @@ class PhlOfficialTest extends TestCase{
         var_dump($res);
     }
 
+    public function testGame(){
+        $obj = new \dasher\spider\lib\phl\Official();
+        $res = $obj->getGameContent(38111);
+        var_dump($res);
+    }
 }

@@ -15,6 +15,7 @@ class Official extends QuerySpider {
 
     protected string $todayUrl = "https://elotto.pcso.gov.ph/lgw/pl/numeros/today_games?_=<t>";
     protected string $historyUrl = 'https://elotto.pcso.gov.ph/lgw/pl/draw/win_order_prize_summaries?gameCode=<gameCode>&startTime=<startTime>&endTime=<endTime>&page=<page>&size=<size>&_=<t>';
+    protected string $gameUrl = "https://elotto.pcso.gov.ph/lgw/pl/numeros/near?gameId=<gameId>";
 
     public function getContent($url){
 
@@ -47,6 +48,14 @@ class Official extends QuerySpider {
         }else{
             throw new SpiderException('Phl lotto GuzzleHttp err!');
         }
+    }
+
+    /**
+     * @throws SpiderException
+     */
+    public function getGameContent($id){
+        $url = str_replace('<gameId>', $id, $this->gameUrl);
+        return $this->getContent($url);
     }
 
     /**
