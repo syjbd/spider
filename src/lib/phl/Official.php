@@ -16,6 +16,7 @@ class Official extends QuerySpider {
     protected string $todayUrl = "https://elotto.pcso.gov.ph/lgw/pl/numeros/today_games?_=<t>";
     protected string $historyUrl = 'https://elotto.pcso.gov.ph/lgw/pl/draw/win_order_prize_summaries?gameCode=<gameCode>&startTime=<startTime>&endTime=<endTime>&page=<page>&size=<size>&_=<t>';
     protected string $gameUrl = "https://elotto.pcso.gov.ph/lgw/pl/numeros/near?gameId=<gameId>";
+    protected string $futureUlr = "https://elotto.pcso.gov.ph/lgw/pl/numeros/recent?gameId=<gameId>&count=<count>";
 
     public function getContent($url){
 
@@ -77,6 +78,13 @@ class Official extends QuerySpider {
         $size       = !empty($data['size']) ? $data['size'] : 5;
         $gameCode   = !empty($data['game_code']) ? $data['game_code'] : 'all';
         $url = str_replace(['<startTime>','<endTime>','<page>','<size>','<gameCode>','<t>'], [$startTime,$endTime,$page,$size,$gameCode,$t], $this->historyUrl);
+        return $this->getContent($url);
+    }
+
+    public function getFutureContent($data){
+        $gameId = !empty($data['game_id']) ? $data['game_id'] : 38111;
+        $count = !empty($data['count']) ? $data['count'] : 100;
+        $url = str_replace(['<gameId>','<count>'], [$gameId,$count], $this->futureUlr);
         return $this->getContent($url);
     }
 
