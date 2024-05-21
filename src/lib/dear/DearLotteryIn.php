@@ -10,7 +10,6 @@ use dasher\spider\lib\QuerySpider;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
-use thiagoalessio\TesseractOCR\TesseractOCR;
 
 class DearLotteryIn extends QuerySpider{
 
