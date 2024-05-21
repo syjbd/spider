@@ -15,12 +15,26 @@ class Sarkariresultsinfo extends QuerySpider{
     protected string $pm1 = 'MN';
     protected string $pm6 = 'DN';
     protected string $pm8 = 'EN';
+    protected array $prizeArr = [
+        '1st Prize'     => 10000000,
+        'Cons. Prize'   => 1000,
+        '2nd Prize'     => 9000,
+        '3rd Prize'     => 450,
+        '4th Prize'     => 250,
+        '5th Prize'     => 120,
+    ];
 
     public function setPm($pm1='MN',$pm6='DN',$pm8='EN'): Sarkariresultsinfo
     {
         $this->pm1 = $pm1;
         $this->pm6 = $pm6;
         $this->pm8 = $pm8;
+        return $this;
+    }
+
+    public function setPrizeArr($prizeArr): Sarkariresultsinfo
+    {
+        $this->prizeArr = $prizeArr;
         return $this;
     }
 
@@ -86,7 +100,7 @@ class Sarkariresultsinfo extends QuerySpider{
             }
             $issues[$issueIndex]['result'][] = [
                 'PrizeName' => $prizeName,
-                'PrizeAmount' => $PrizeAmount,
+                'PrizeAmount' => $this->prizeArr[$prizeName],
                 'Winners' => $winnerArray
             ];
         }
