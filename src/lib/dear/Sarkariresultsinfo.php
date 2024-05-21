@@ -93,6 +93,7 @@ class Sarkariresultsinfo extends QuerySpider{
                 $issues[$issueIndex]['issue_no'] = $issueNoArr[$issueIndex];
                 $issues[$issueIndex]['result'] = [];
             }
+            if($prizeName === '2rd Prize') $prizeName = '2nd Prize';
             $winnerList = explode('-',$winners[$key]);
             $winnerArray = [];
             foreach ($winnerList as $winner){
