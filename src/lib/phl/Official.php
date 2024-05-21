@@ -18,8 +18,7 @@ class Official extends QuerySpider {
     protected string $gameUrl = "https://elotto.pcso.gov.ph/lgw/pl/numeros/near?gameId=<gameId>";
     protected string $futureUlr = "https://elotto.pcso.gov.ph/lgw/pl/numeros/recent?gameId=<gameId>&count=<count>";
 
-    public function getContent($url){
-
+    public function getContent($url, $token=''){
         $options = [
             RequestOptions::VERIFY => false, # disable SSL certificate validation
             RequestOptions::TIMEOUT => 30, # timeout of 30 seconds
@@ -38,8 +37,11 @@ class Official extends QuerySpider {
                 'sec-fetch-site' => 'same-origin',
                 'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
                 'x-gateway-version' => '509',
-            ]
+            ],
         ];
+        if(!empty($token)){
+            $options[RequestOptions::HEADERS]['authorization'] = $token;
+        }
         if(!empty($this->proxy)) $options[RequestOptions::PROXY] = $this->proxy;
         $client= new Client($options);
         $response = $client->get($url);

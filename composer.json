@@ -19,7 +19,8 @@
 		"jaeger/querylist": "^4.2",
 		"tightenco/collect": "5.*",
 		"guzzlehttp/guzzle": "^6.5.8 || ^7.4.5",
-		"smalot/pdfparser": "^2.9"
+		"smalot/pdfparser": "^2.9",
+		"thiagoalessio/tesseract_ocr": "^2.13"
 	},
 	"autoload": {
 		"psr-4": {

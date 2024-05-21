@@ -16,7 +16,13 @@ class DearOfficialTest extends TestCase{
 
     public function testOfficialPdf(){
         $obj = new \dasher\spider\lib\kerala\Official();
-        $res = $obj->pdfToText(dirname(__DIR__, 1) . '/src/down/KN-511.pdf');
+        $res = $obj->pdfToText(dirname(__DIR__, 1) . '/src/down/1pm.jpg');
+        var_dump($res);
+    }
+
+    public function testIndiaDear(){
+        $obj = new \dasher\spider\lib\dear\DearLotteryIn();
+        $res = $obj->getDetail(1, dirname(__DIR__, 1).'/src/down/1pm.jpg');
         var_dump($res);
     }
 }
