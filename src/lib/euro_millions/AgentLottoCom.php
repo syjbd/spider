@@ -28,9 +28,11 @@ class AgentLottoCom extends QuerySpider {
         '2+0PB' => '13th',
     ];
 
-    public function getPageDetail(): array
-    {
+    protected $symbol = '$';
 
+    public function getPageDetail($symbol="₹"): array
+    {
+        if(!empty($symbol)) $this->symbol = $symbol;
         $ql = $this->getHtml($this->detailApiUrl);
         $res = $ql->find('.results_item_mid .numberList li span')->texts()->all();
         $dateText = $ql->find('.lott_info .lott_data')->text();
@@ -48,8 +50,8 @@ class AgentLottoCom extends QuerySpider {
         return [
             'date'      => date('Ymd', $time),
             'result'    => $res,
-            'symbol'    => "$",
-            'options'   => self::getOptions($this->optionConfig,$optionList)
+            'symbol'    => $this->symbol,
+            'options'   => self::getOptions($this->optionConfig,$optionList, $this->symbol)
         ];
     }
 
