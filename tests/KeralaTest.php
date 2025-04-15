@@ -8,6 +8,17 @@ use PHPUnit\Framework\TestCase;
 class KeralaTest extends TestCase
 {
 
+    public function testLottIn(){
+        try {
+            $arr = (new \dasher\spider\lib\kerala\LottIn())->getResult(7, 'FF-130');
+        }  catch (\Exception $e) {
+            $arr = '';
+            debug_print_backtrace();
+        }
+        self::assertIsArray($arr);
+        self::assertTrue(true);
+    }
+
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \dasher\spider\exception\SpiderException
